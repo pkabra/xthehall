@@ -6,5 +6,9 @@ def bash_profile_settings():
 def install_virtualenv():
 	call("sudo pip install virtualenv", shell=True)
 
+def install_pip():
+	call("sudo easy_install pip")
+
+install_pip()
 bash_profile_settings()
 install_virtualenv()
