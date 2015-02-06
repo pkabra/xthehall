@@ -1,0 +1,46 @@
+/*
+* Custom CSS
+* Authors Pratik, Nick, Raj
+*/
+
+.container {
+	padding-top: 50px;
+}
+
+.section {
+	margin: 30px 0;
+}
+
+.image {
+	background-size:cover;
+	background-position:center center;
+	display:block;
+	height:160px;
+	margin-bottom:30px;
+}
+
+.header {
+    background: #eee;
+    border: solid 1px #222;
+    padding: 10px;
+    margin-bottom: 25px
+}
+
+.header > div, .header > ul {
+    display: inline-block;
+}
+
+.header >ul {
+    margin-bottom: 0;
+    float: right;
+}
+
+.header > ul li {
+    display: inline-block;
+    margin-bottom: 0;
+	margin-bottom:30px;
+}
+
+#nomatch-warning {
+    color: red;
+}
