@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 
-{% block body %}
+{% block login %}
     <h1>Hello World</h1>
+
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+	</fb:login-button>
+
+	<div id="status">
+	</div>
+    <button onclick="FB.logout()">Logout</button>
+{% endblock %}
+
+{% block instant_message %}
+    <div class="frame">
+            <h3>Chat</h3>
+            <div id="chat">
+                <form id="newMessage">
+                    <input id="recipients" placeholder="Recipients (separate with space)"><br>
+                    <input id="message" placeholder="message"><br>
+                    <button id="sendMsg">Send</button>
+                </form>
+                <div id="chatArea">
+                </div>
+            </div>
+    </div>
+{% endblock %}
+
+{% block fbloginjs %}
+    <script type="text/javascript" src="/static/js/fblogin.js"></script>  
 {% endblock %}

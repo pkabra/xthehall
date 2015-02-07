@@ -1,34 +1,35 @@
 from core import app
 from models import User
-from flask import render_template, request, redirect, url_for, session
-import datetime
+from flask import render_template, request, redirect, url_for, session, jsonify
+from datetime import datetime
+import json
+import uuid
+import hmac
+import hashlib
+import base64
 
+# App key + secret
+APPLICATION_KEY = 'cabb81ca-a248-412a-93b4-e5d9ba3d1548'
+APPLICATION_SECRET = 'BtQohS+9zEKXCH9aN/GVtQ=='
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'GET':
-        return render_template('login.html')
+@app.route('/auth/getAuthTicket', methods=['POST'])
+def getAuthTicket():
+    userTicket = {
+        'identity': {'type': 'username', 'endpoint': request.form['username']},
+        'expiresIn': 3600, #1 hour expiration time of session when created using this ticket
+        'applicationKey': APPLICATION_KEY,
+        'created': datetime.utcnow().isoformat()
+    }
 
-    if request.method == 'POST':
-        username = request.form['username']
-        user = User.query.filter_by(username=username).first()
+    userTicketJson = json.dumps(userTicket).replace(" ", "")
+    userTicketBase64 = base64.b64encode(userTicketJson)
 
-        if not user:
-            return render_template('login.html', msg='Your username or password is invalid')
+    # TicketSignature = Base64 ( HMAC-SHA256 ( ApplicationSecret, UTF8 ( UserTicketJson ) ) )
+    digest = hmac.new(base64.b64decode(
+        APPLICATION_SECRET), msg=userTicketJson, digestmod=hashlib.sha256).digest()
+    signature = base64.b64encode(digest)
 
-        if not user.check_password(request.form['password']):
-            return render_template('login.html', msg='Your username or password is invalid')
+    # UserTicket = TicketData + ":" + TicketSignature
+    signedUserTicket = userTicketBase64 + ':' + signature
+    return jsonify(userTicket = signedUserTicket)
 
-        session['username'] = user.username
-        session['last_activity'] = datetime.datetime.utcnow()
-
-        if 'next_page' in request.args:
-            return redirect(request.args['next_page'])
-        else:
-            return redirect(url_for('index'))
-
-
-@app.route('/logout')
-def logout():
-    session.clear()
-    return redirect(url_for('index'))

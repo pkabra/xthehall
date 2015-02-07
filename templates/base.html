@@ -17,8 +17,12 @@
         <link rel="stylesheet" href="/static/css/layout.css">
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/static/css/main.css">
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/tables-min.css
-">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/tables-min.css">
+        <!-- JQuery -->
+        <script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
+        <!-- Sinch SDK -->
+        <script type="text/javascript" src="/static/js/sinch.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/q.js/0.9.2/q.js"></script>
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -41,10 +45,18 @@
             </div>
             {% endif %}
 
-            {% block body %}
+            {% block login %}
+            {% endblock %}
+
+            {% block instant_message %}
             {% endblock %}
         </div>
 
+        {% block fbloginjs %}
+        {% endblock %}
+
         <script src="/static/js/plugins.js"></script>
+        <!-- instant message js -->
+        <script type="text/javascript" src="/static/js/im.js"></script>
     </body>
 </html>
