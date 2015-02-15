@@ -11,6 +11,7 @@ app.factory('ProfileService', function() {
   return {
     // Initialize user profile with id. Create a new profile when the profile
     // asscociated with id does not exist.
+    // TODO(dilu): Remove debug logging when code is well-tested.
     init : function(id) {
       var query = new Parse.Query('Profile');
       query.equalTo('fbid', id.toString());
@@ -57,24 +58,27 @@ app.factory('ProfileService', function() {
 
     setId : function(id) {
       profile.setFbid(id);
+      profile.save(null);
     },
 
     setInterest : function(interest) {
       profile.setInterest(interest);
+      profile.save(null);
     },
 
     setAvatar : function(avatar) {
       profile.setAvatar(avatar);
+      profile.save(null);
     },
 
     setNickname : function(nickname) {
-      console.log('set');
       profile.setNickname(nickname);
-      console.log(profile.getNickname());
+      profile.save(null);
     },
 
     setHospital_info : function(hospital_info) {
       profile.setHospital_info(hospital_info);
+      profile.save(null);
     }
   };
 });

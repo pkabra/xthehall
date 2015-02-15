@@ -1,6 +1,7 @@
 <h1> {{ title }} </h1>
 
-<fb:login-button scope="public_profile,email">
+<!-- Please do not delete -->
+<fb:login-button scope="public_profile,email" onlogin="angular.element('html').injector().get('AuthService').watchStatusChange()">
 </fb:login-button>
 
 <div id="status">

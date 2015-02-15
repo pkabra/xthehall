@@ -6,6 +6,7 @@ app.factory('InstantMessageService', function($window) {
       capabilities: {messaging: true},
       startActiveConnection: true, /* NOTE: This is required if application is to receive calls / instant messages. */ 
       //Note: For additional loging, please uncomment the three rows below
+      // TODO(dilu): Remove debug logging when code is well-tested.
       onLogMessage: function(message) {
           console.log(message);
       },

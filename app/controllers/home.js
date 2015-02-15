@@ -1,7 +1,9 @@
 angular.module('XtheHall')
-  .controller('HomeController', function($scope, InstantMessageService, ProfileService, HistoryService) {
+  .controller('HomeController', function($scope, AuthService, InstantMessageService, ProfileService, HistoryService) {
     $scope.title = "Hello World";
 
+    // Please do not delete. This section contains example how to use 
+    // InstantMessageService, ProfileService, HistoryService
     var incomingmessageListener = function(message) {
       $('div#chatArea').append('<div class="msgRow" id="'+message.messageId+'"></div><div class="clearfix"></div>');
 
@@ -36,6 +38,10 @@ angular.module('XtheHall')
         HistoryService.save(recipients[i], $scope.user.id, text);
       }
     };
+
+    $scope.onlogin = function() {
+      AuthService.watchStatusChange();
+    }
 
     $scope.getHistory = function() {
       HistoryService.retrieve('12345', $scope.user.id, 10).then(

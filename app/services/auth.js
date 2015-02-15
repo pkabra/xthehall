@@ -14,7 +14,8 @@ app.factory('AuthService', function($rootScope, InstantMessageService, ProfileSe
   };
 
   return {
-    // This is called with the results from from FB.getLoginStatus().
+    // Check the facebook login status.
+    // TODO(dilu): Remove debug logging when code is well-tested.
     watchStatusChange : function() {
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
@@ -33,7 +34,7 @@ app.factory('AuthService', function($rootScope, InstantMessageService, ProfileSe
       })
     },
 
-    // log out
+    // Facebook log out
     logout : function() {
       FB.logout(function(response) {
         $rootScope.$apply(function() {
