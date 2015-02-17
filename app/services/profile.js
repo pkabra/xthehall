@@ -11,6 +11,8 @@ app.factory('ProfileService', function() {
   return {
     // Initialize user profile with id. Create a new profile when the profile
     // asscociated with id does not exist.
+    // para:
+    //       id: user facebook id
     // TODO(dilu): Remove debug logging when code is well-tested.
     init : function(id) {
       var query = new Parse.Query('Profile');

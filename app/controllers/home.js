@@ -2,7 +2,7 @@ angular.module('XtheHall')
   .controller('HomeController', function($scope, AuthService, InstantMessageService, ProfileService, HistoryService) {
     $scope.title = "Hello World";
 
-    // Please do not delete. This section contains example how to use 
+    // Please DO NOT delete. This section contains example how to use 
     // InstantMessageService, ProfileService, HistoryService
     var incomingmessageListener = function(message) {
       $('div#chatArea').append('<div class="msgRow" id="'+message.messageId+'"></div><div class="clearfix"></div>');

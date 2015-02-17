@@ -15,6 +15,7 @@ app.factory('InstantMessageService', function($window) {
   // Sinch message client
   var messageClient = sinchClient.getMessageClient();
 
+  // Sinch application key and secret
   var appKey = 'cabb81ca-a248-412a-93b4-e5d9ba3d1548';
   var appSecret = 'BtQohS+9zEKXCH9aN/GVtQ==';
 
@@ -46,13 +47,17 @@ app.factory('InstantMessageService', function($window) {
 
   return {
     // login to sinch with facebook id
+    // para:
+    //       id: user facebook ID
     loginSinch : function(id) {
       var ticket = generateTicket(id);
       sinchClient.start(ticket);
     },
 
     // send message
-    // recipients: list of user names
+    // para:
+    //       recipients: list of user names
+    //       text: message text
     sendMessage : function(recipients, text) {
       //Create new sinch-message, using messageClient
       var sinchMessage = messageClient.newMessage(recipients, text);
@@ -61,12 +66,16 @@ app.factory('InstantMessageService', function($window) {
     },
 
     // add incoming message listener
+    // para:
+    //       listener: incoming mesasge callback handler 
     addIncomingMessageListener : function(listener) {
       var eventListener = { onIncomingMessage : listener };
       messageClient.addEventListener(eventListener);
     },
 
     // add delivered message listener
+    // para:
+    //       listener: delivered message callback handler
     addDeliveredMessageListener : function(listener) {
       var eventListener = { onMessageDelivered : listener };
       messageClient.addEventListener(eventListener); 

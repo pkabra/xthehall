@@ -12,11 +12,11 @@ var app = angular.module('XtheHall', [
     .otherwise({
       redirectTo: '/home'
     });
-}).run(function($rootScope){
+}).run(function($rootScope, $window, AuthService) {
   $rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
     console.log(event, current, previous, rejection);
   })
-}).run(function($rootScope, $window, AuthService) {
+
   // create a user variable which is accessable from root scope
   $rootScope.user = {};
 
