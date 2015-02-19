@@ -34,7 +34,13 @@
         </div>
         <div class="col-xs-6 col-md-3">
             <a href="#" class="thumbnail">
-                <div>Words</div>
+                <div class="count-bubble">
+                    <span>5</span>
+                </div>
+                <div class="message-preview">
+                    <span>Here is a message!!!</span>
+                </div>
+                <div class="chat-id-timestamp">11:11 pm</div>
                 <div class="chat-id-pic"></div>
             </a>
         </div>
@@ -49,6 +55,42 @@
 </html>
 
 <style>
+    .count-bubble span {
+        background: #E74C3C;
+        position: absolute;
+        top: -15px;
+        Right: -15px;
+        min-width:30px;
+        height: 30px;
+        color: #ffffff;
+        border-radius: 50%;
+        padding: 2px;
+        text-align: center;
+        box-shadow: 0 0 0 2pt #C0392B;
+    }
+
+    div.message-preview {
+        margin: 10px 5px 0 5px;
+        padding: 5px;
+        text-align: center;
+        border-radius: 25px;
+        max-height: 130px;
+        min-height: 130px;
+        background: #F1C40F;
+        box-shadow: 0 0 0 2pt #F39C12;
+    }
+
+    div.message-preview span {
+        color: white;
+    }
+
+    div.chat-id-timestamp {
+        position: absolute;
+        bottom: 7px;
+        left: 7px;
+        color: gray;
+    }
+
     div.chat-id-pic {
         width: 50px;
         height: 50px;
@@ -62,10 +104,10 @@
 
     .thumbnail {
         position: relative;
-        min-height: 200px;
-        height: 200px;
-        min-width: 200px;
-        width: 200px;
+        min-height: 220px;
+        height: 220px;
+        min-width: 220px;
+        width: 220px;
     }
 
     h4.page-header {
