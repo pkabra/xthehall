@@ -18,7 +18,7 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" id="chatArea">
   <div class="row" ng-repeat="message in messages">
     <div class="col-xs-8 col-md-6" ng-if="message.incoming">
       <div class="message incoming">
@@ -37,7 +37,7 @@
   <div class="container-fluid">
     <div class="row message-box">
       <div class="col-xs-10">
-        <input type="text" class="form-control" placeholder="Type your message here...">
+        <input type="text" class="form-control" id="message" placeholder="Type your message here...">
       </div>
       <div class="col-xs-1">
         <button type="button" class="btn btn-default">
@@ -45,7 +45,7 @@
         </button>
       </div>
       <div class="col-xs-1">
-        <button type="button" class="btn btn-default">
+        <button type="button" class="btn btn-default" ng-click="sendMessage()">
           <i class="fa fa-send"></i>
         </button>
       </div>
