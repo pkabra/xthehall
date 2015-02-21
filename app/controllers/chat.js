@@ -3,14 +3,14 @@ angular.module('XtheHall')
     $scope.title = $scope.user.id;
 
     var recipient = "12345";
+    $scope.messages = [];
 
-    var inhistory = HistoryService.retrieve($scope.user.id, recipient, 5);
-    console.log($scope.user.id);
-    var outhistory = HistoryService.retrieve(recipient, $scope.user.id, 5);
-    for (var i = 0; i < inhistory.length; i++) {
-        $scope.messages.append({ incoming: true, user: "dilu", text: inhistory.message});
-        console.log('aa');
-    }
+    HistoryService.retrieve($scope.user.id, recipient, 5).then(
+        function(inhistory) {
+            for (var i = 0; i < inhistory.length; i++) {
+            $scope.messages.push({ incoming: true, user: "dilu", text: inhistory.message});
+        }
+        });
 
     // Please DO NOT delete. This section contains example how to use 
     // InstantMessageService, ProfileService, HistoryService
