@@ -41,12 +41,21 @@ angular.module('XtheHall')
 
     $scope.onlogin = function() {
       AuthService.watchStatusChange();
-    }
+    };
 
     $scope.getHistory = function() {
       HistoryService.retrieve('12345', $scope.user.id, 10).then(
         function(history) {
           console.log(history);
-        })
-    }
+        });
+    };
+
+
+    // Profile image upload and retrieval example.
+    $scope.uploadImage = function(files) {
+      ProfileService.setImage(files)
+        .then(function() {
+        $scope.imageUrl = ProfileService.getImage();
+      });
+    };
   });

@@ -1,8 +1,13 @@
 app.factory('HistoryService', function() {
 
-  var History = Parse.Object.extend({
-    className: 'History',
-    attrs: ['receiver_id', 'sender_id', 'message']
+  var Chatrooms = Parse.Object.extend({
+    className: 'Chatrooms',
+    attrs: ['room_id', 'users']
+  });
+
+  var MessageHistory = Parse.Object.extend({
+    className: 'MessageHistory',
+    attrs: ['room_id', 'sender_id', 'message']
   });
 
   return {
@@ -11,13 +16,20 @@ app.factory('HistoryService', function() {
     //       receiver: receiver ID
     //       sender: sender ID
     //       m: message      
-    save : function(receiver, sender, m) {
-      var history = new Parse.Object('History');
-      history.setReceiver_id(receiver);
+    save : function(room, sender, m) {
+      var history = new Parse.Object('MessageHistory');
+      history.setRoom_id(room);
       history.setSender_id(sender);
       history.setMessage(m);
       // TODO(dilu): Add save success and failure handlers.
       history.save(null);
+    },
+
+    create_room: function (room_id, users) {
+      var room = new Parse.Object('Chatrooms');
+      room.setRoom_id(room_id);
+      room.setUsers(users);
+      room.save(null);
     },
 
     // Retrieves the chat history and return a promise.
@@ -26,13 +38,12 @@ app.factory('HistoryService', function() {
     //       sender: sender ID
     //       num: number of messages retrieved
     // Return a list of chat history containing timestamp and message text as a promise.
-    retrieve : function(receiver, sender, num) {
+    retrieve : function(room_id, num) {
       // promise
       var deferred = new $.Deferred();
 
-      query = new Parse.Query('History');
-      query.equalTo('receiver_id', receiver);
-      query.equalTo('sender_id', sender);
+      query = new Parse.Query('MessageHistory');
+      query.equalTo('room_id', room_id);
       query.descending('createdAt');
       query.limit(num);
 
@@ -41,7 +52,7 @@ app.factory('HistoryService', function() {
           // chat history
           var history = [];
           for (var i = 0; i < results.length; i++) {
-            history.push({'time' : results[i].createdAt, 'message' : results[i].get('message')});
+            history.push({'time' : results[i].createdAt, 'message' : results[i].get('message'), 'sender': results[i].get('sender_id')});
           }
           deferred.resolve(history);
         });

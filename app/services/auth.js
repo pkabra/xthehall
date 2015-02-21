@@ -1,14 +1,16 @@
-app.factory('AuthService', function($rootScope, InstantMessageService, ProfileService) {
+app.factory('AuthService', function($rootScope, $location, InstantMessageService, ProfileService) {
 
   'use strict';
 
   // intialze user object, Sinch client, user profile.
-  function init() {
+  function init(d) {
     FB.api('/me', function(response) {
       $rootScope.$apply(function() {
         $rootScope.user = response;
         InstantMessageService.loginSinch(response.id);
         ProfileService.init(response.id);
+        if (!angular.isUndefined(d))
+          d.resolve();
       });
     })
   };
@@ -16,20 +18,14 @@ app.factory('AuthService', function($rootScope, InstantMessageService, ProfileSe
   return {
     // Check the facebook login status.
     // TODO(dilu): Remove debug logging when code is well-tested.
-    watchStatusChange : function() {
+    watchStatusChange : function(d) {
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
-            init();
-            document.getElementById('status').innerHTML = 'Successfully logged in';
-        } else if (response.status === 'not_authorized') {
-          // The person is logged into Facebook, but not your app.
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
+            init(d);
         } else {
           // The person is not logged into Facebook, so we're not sure if
           // they are logged into this app or not.
-          document.getElementById('status').innerHTML = 'Please log ' +
-            'into Facebook.';
+          d.reject("login_failed");
         }
       })
     },

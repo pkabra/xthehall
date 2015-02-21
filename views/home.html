@@ -23,3 +23,7 @@
 </div>
 
 <button ng-click="getHistory()">GetHistory</button>
+
+<input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files);"/>
+
+<img ng-src="{{ imageUrl }}">

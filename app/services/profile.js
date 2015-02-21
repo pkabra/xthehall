@@ -1,12 +1,12 @@
-app.factory('ProfileService', function() {
+app.factory('ProfileService', function($q) {
 
   var Profile = Parse.Object.extend({
     className: 'Profile',
-    attrs: ['fbid', 'interest', 'avatar', 'nickname', 'hospital_info']
+    attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info']
   });
 
   // singleton
-  var profile = new Profile();
+  var profile = null;
 
   return {
     // Initialize user profile with id. Create a new profile when the profile
@@ -42,6 +42,11 @@ app.factory('ProfileService', function() {
       return profile.getFbid();
     },
 
+    // return a URL to the image due to cross domain secucity issue
+    getImage : function() {
+      return profile.getImage().url();
+    },
+
     getInterest : function() {
       return profile.getInterest();
     },
@@ -58,29 +63,44 @@ app.factory('ProfileService', function() {
       return profile.getHospital_info();
     },
 
-    setId : function(id) {
-      profile.setFbid(id);
-      profile.save(null);
+    setImage : function(files) {
+      var deferred = $q.defer();
+      if (files.length > 0) {
+        var file = files[0];
+        var parseFile = new Parse.File(file.name, file);
+        parseFile.save().then(function() {
+          profile.setImage(parseFile);
+          profile.save().then(function() {
+            deferred.resolve();
+          });
+        }, function(error) {
+          console.log('Failed to save image to Parse ' + error);
+        });
+      } else {
+        console.log('image file is empty');
+      }
+
+      return deferred.promise;
     },
 
     setInterest : function(interest) {
       profile.setInterest(interest);
-      profile.save(null);
+      profile.save();
     },
 
     setAvatar : function(avatar) {
       profile.setAvatar(avatar);
-      profile.save(null);
+      profile.save();
     },
 
     setNickname : function(nickname) {
       profile.setNickname(nickname);
-      profile.save(null);
+      profile.save();
     },
 
     setHospital_info : function(hospital_info) {
       profile.setHospital_info(hospital_info);
-      profile.save(null);
+      profile.save();
     }
   };
 });
