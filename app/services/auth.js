@@ -9,7 +9,8 @@ app.factory('AuthService', function($rootScope, $location, InstantMessageService
         $rootScope.user = response;
         InstantMessageService.loginSinch(response.id);
         ProfileService.init(response.id);
-        d.resolve();
+        if (!angular.isUndefined(d))
+          d.resolve();
       });
     })
   };
