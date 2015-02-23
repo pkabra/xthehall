@@ -1,0 +1,116 @@
+
+<head>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
+
+<style>
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+
+
+</style>
+
+
+</head>
+
+
+<div   class="form-inline text-center" style="font-size:20px;" > 
+
+
+
+
+
+<p class="text-center"> Avatar </p>
+
+
+<hr>
+
+
+<div ng-show="!is_file_yes" class="input-group">
+    <span class="input-group-btn">
+        <span class="btn btn-default btn-file">
+            Choose File&hellip; <input type="file" accept="image/*" id="image-input" file-model="myFile" ng-model="fileUpload" onchange="angular.element(this).scope().image_upload();"  type="file" multiple>
+        </span>
+    </span>
+    <input type="text" class="form-control text-center" ng-model="avatar_img_name" readonly> 
+</div>
+
+
+
+<br><br>
+
+<div>
+    <img id="image-container" style="width:200px;height:200px"/>
+</div>
+
+<br><br>
+
+<p class="text-center"> Nickname </p>
+
+<hr>
+
+<input ng-model="nickname" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>
+
+<br><br><br>
+
+<p class="text-center"> Hospital </p>
+
+<hr>
+
+
+<select class="form-control " style="height: 50px; font-size:25px;">
+
+  <option ng-repeat="hospital in hospital_list" value="{{hospital}}"> {{hospital}} </option>
+
+</select>
+
+
+
+<br><br><br>
+
+<p class="text-center"> Interests </p>
+
+<hr>
+
+<em> Add interests using the last box. Delete existing interests by clicking on them. </em>
+
+<br>
+<br>
+
+<div class="row">
+
+<div class="col-md-4"></div>
+<div class="col-md-4">
+
+<ul class="list-group">
+  <li ng-repeat="interest in interest_list" ng-click="click($index);" class="list-group-item"> {{interest}} </li>
+
+    <li class="list-group-item">  <input ng-model="new_interest" ng-enter="add_interest(new_interest, interest_list);" style="width: 400px; text-align: center; border-style:none;"> </input> </li>
+</ul>
+<!-- <input type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; [[num]]" value="[[ numStudents ]]" readonly> -->
+
+</div>
+
+
+</div>
+
+</div>
+<!-- </html> -->
