@@ -76,7 +76,7 @@
 <hr>
 
 
-<select class="form-control " style="height: 50px; font-size:25px;">
+<select class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">
 
   <option ng-repeat="hospital in hospital_list" value="{{hospital}}"> {{hospital}} </option>
 
@@ -111,6 +111,15 @@
 
 
 </div>
+
+
+       <p class="text-center">
+       <br>
+          <button ng-click="save()" class="btn btn-success" style="height: 85px; width: 200px; font-size:40px;"> Submit </button>
+        </p>
+        <br>
+        <br>
+        <br>
 
 </div>
 <!-- </html> -->

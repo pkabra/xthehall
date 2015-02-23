@@ -9,6 +9,11 @@ var app = angular.module('XtheHall', [
       controller: 'HomeController',
       controllerAs: 'home'
     })
+    .when('/profile_settings', {
+      templateUrl: 'views/profile_settings.html',
+      controller: 'ProfileSettingsController',
+      controllerAs: 'profile_settings'
+    })
     .when('/chat', {
       templateUrl: 'views/chat.html',
       controller: 'ChatController',
