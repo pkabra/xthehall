@@ -36,6 +36,11 @@ var app = angular.module('XtheHall', [
     .when('/login', {
       templateUrl: 'views/login.html'
     })
+    .when('/main', {
+      templateUrl: 'views/main.html',
+      controller: 'MainController',
+      controllerAs: 'main'
+    })
     .otherwise({
       redirectTo: '/home'
     });
