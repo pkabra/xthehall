@@ -67,7 +67,7 @@
 
 <hr>
 
-<input ng-model="nickname" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>
+<input ng-model="nickname" ng-click="click_nickname();" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>
 
 <br><br><br>
 

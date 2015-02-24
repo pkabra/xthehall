@@ -21,6 +21,15 @@ angular.module('XtheHall')
       $scope.interest_list = ["Soccer", "Football", "Basketball"];
       $scope.nickname_width = "width: 50px;";
 
+    $scope.click_nickname = function(){
+
+      console.log("CLICK!");
+
+      final_transcript = '';
+      recognition.start();
+
+
+    }
 
     $scope.image_upload = function(){
 
@@ -64,12 +73,31 @@ $scope.click = function(index)
 };
 
 
+
+    if (!('webkitSpeechRecognition' in window)) {
+        console.log("DAMN");
+    } else {
+      console.log("COOL");
+
+      var recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = function() {  };
+      recognition.onresult = function(event) { $scope.nickname = event.results[event.results.length-1][0].transcript; $scope.nickname_width = $scope.onWrite($scope.nickname); console.log($scope.nickname); $scope.$apply();};
+      recognition.onerror = function(event) {  };
+      recognition.onend = function() {  };
+
+    }
+
+
       function init() {
 
         // ProfileService.getNickname();
 
 
-        $scope.nickname = ProfileService.getNickname();
+        // $scope.nickname = ProfileService.getNickname();
+        $scope.nickname = "Michael Wang";
         $scope.nickname_width = $scope.onWrite($scope.nickname);
         $scope.hospital_list = JSON.parse('["Mott Children\'s Hospital", "Univ. of Michigan Hospital", "Ohio State Hospital"]');
         $scope.interest_list = JSON.parse('["Soccer", "Football", "Basketball"]');
