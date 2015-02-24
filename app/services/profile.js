@@ -15,6 +15,7 @@ app.factory('ProfileService', function($q) {
     //       id: user facebook id
     // TODO(dilu): Remove debug logging when code is well-tested.
     init : function(id) {
+      var deferred = $q.defer();
       var query = new Parse.Query('Profile');
       query.equalTo('fbid', id.toString());
       query.find().then(
@@ -32,10 +33,13 @@ app.factory('ProfileService', function($q) {
           } else {
             profile = result[0];
           }
+          deferred.resolve();
         },
         function(error) {
           console.log('Failed to retrieve profile with id' + id.toString());
+          deferred.resolve();
         });
+      return deferred.promise;
     },
 
     getId : function() {

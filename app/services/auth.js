@@ -1,4 +1,4 @@
-app.factory('AuthService', function($rootScope, $location, InstantMessageService, ProfileService) {
+app.factory('AuthService', function($q, $rootScope, $location, InstantMessageService, ProfileService) {
 
   'use strict';
 
@@ -8,9 +8,10 @@ app.factory('AuthService', function($rootScope, $location, InstantMessageService
       $rootScope.$apply(function() {
         $rootScope.user = response;
         InstantMessageService.loginSinch(response.id);
-        ProfileService.init(response.id);
-        if (!angular.isUndefined(d))
+        ProfileService.init(response.id).then(function() {
+          if (!angular.isUndefined(d))
           d.resolve();
+        });
       });
     })
   };
