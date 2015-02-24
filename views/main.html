@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Main</title>
-
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../css/flat-ui.min.css">
-</head>
-<body>
 <nav class="navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -19,111 +8,33 @@
 <div class="container">
     <h4 class="page-header">Trending Topics</h4>
     <ul id="main-topic-list">
-        <li><a href="#">Item one</a></li>
-        <li><a href="#">Item two</a></li>
-        <li><a href="#">Item three</a></li>
-        <li><a href="#">Item four</a></li>
-        <li><a href="#">Item five</a></li>
+        <li ng-repeat="topic in trendingTopics">{{topic}}</li>
     </ul>
     <h4 class="page-header">Chats</h4>
     <div id="main-chat" class="row">
-        <div class="col-xs-6 col-md-3">
+        <div class="col">
             <a href="#" class="thumbnail">
                 <img src="../images/Plus.png" />
             </a>
         </div>
-        <div class="col-xs-6 col-md-3">
+        <div class="col" ng-repeat="conversation in conversationPreviews">
             <a href="#" class="thumbnail">
-                <div class="count-bubble">
-                    <span>5</span>
+                <div class="count-bubble" ng-show="conversation.unreadCount > 0">
+                    <span>{{conversation.unreadCount}}</span>
                 </div>
                 <div class="message-preview">
-                    <span>Here is a message!!!</span>
+                    <span>{{conversation.messagePreview}}</span>
                 </div>
-                <div class="chat-id-timestamp">11:11 pm</div>
-                <div class="chat-id-pic"></div>
+                <div class="chat-id-timestamp">{{conversation.timestamp}}</div>
+                <div class="chat-id-pic" style="background-image: url('{{conversation.picUrl}}');"></div>
             </a>
         </div>
     </div>
 </div>
-<script src="../js/jquery-1.11.2.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/sinch.min.js"></script>
-<script src="../js/angular/angular.min.js"></script>
-<script src="../js/flat-ui.min.js"></script>
-</body>
-</html>
 
 <style>
-    .count-bubble span {
-        background: #E74C3C;
-        position: absolute;
-        top: -15px;
-        Right: -15px;
-        min-width:30px;
-        height: 30px;
-        color: #ffffff;
-        border-radius: 50%;
-        padding: 2px;
-        text-align: center;
-        box-shadow: 0 0 0 2pt #C0392B;
-    }
-
-    div.message-preview {
-        margin: 10px 5px 0 5px;
-        padding: 5px;
-        text-align: center;
-        border-radius: 25px;
-        max-height: 130px;
-        min-height: 130px;
-        background: #F1C40F;
-        box-shadow: 0 0 0 2pt #F39C12;
-    }
-
-    div.message-preview span {
-        color: white;
-    }
-
-    div.chat-id-timestamp {
-        position: absolute;
-        bottom: 7px;
-        left: 7px;
-        color: gray;
-    }
-
-    div.chat-id-pic {
-        width: 44px;
-        height: 44px;
-        background-image: url("../images/SmallLogo1.png");
-        border-radius: 50%;
-        position: absolute;
-        bottom: 7px;
-        right: 7px;
-        box-shadow: 0 0 0 2pt #bdc3c7;
-    }
-
-    .thumbnail {
-        position: relative;
-        min-height: 220px;
-        height: 220px;
-        min-width: 220px;
-        width: 220px;
-    }
-
-    h4.page-header {
-        margin-top: 40px;
-        margin-bottom: 20px;
-    }
-
-    ul#main-topic-list {
-        padding-left: 3px;
-    }
-
-    #main-topic-list li {
-        display: inline;
-        list-style-type: none;
-        padding-right: 20px;
-        padding-left: -20px;
+    body{
+        padding-top: 0;
     }
 
 </style>
