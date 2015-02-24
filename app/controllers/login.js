@@ -1,7 +1,11 @@
 angular.module('XtheHall')
-.controller('LoginController', function($scope, AuthService) {
-  $scope.login = function () {
-    FB.login();
-    AuthService.watchChangeStatus($.Deferred());
+.controller('LoginController', function($q, $scope, AuthService) {
+  console.log("hello");
+  $scope.loginfb = function () {
+    FB.login(function (response) {
+      if (response.status == 'connected') {
+        window.location.href="#/main";
+      }
+    });
   }  
 });

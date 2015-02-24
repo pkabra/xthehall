@@ -44,7 +44,8 @@ var app = angular.module('XtheHall', [
       }
     })
     .when('/login', {
-      templateUrl: 'views/login.html'
+      templateUrl: 'views/login.html',
+      controller: 'LoginController'
     })
     .when('/main', {
       templateUrl: 'views/main.html',

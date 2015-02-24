@@ -25,7 +25,9 @@ app.factory('AuthService', function($rootScope, $location, InstantMessageService
         } else {
           // The person is not logged into Facebook, so we're not sure if
           // they are logged into this app or not.
-          d.reject("login_failed");
+          if (!angular.isUndefined(d)) {
+            d.reject("login_failed");
+          }
         }
       })
     },
