@@ -95,9 +95,9 @@ div.chat-id-pic {
 
 .thumbnail {
     position: relative;
-    min-height: 220px;
+    /*min-height: 220px;*/
     height: 220px;
-    min-width: 220px;
+    /*min-width: 220px;*/
     width: 220px;
 }
 

@@ -5,6 +5,26 @@
         </div>
     </div>
 </nav>
+
+
+<div class="modal fade" id="createChatRoomModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Initialize Chat</h4>
+            </div>
+            <div class="modal-body">
+                <p>Who is going to be your new best friend?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Chat!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <h4 class="page-header">Trending Topics</h4>
     <ul id="main-topic-list">
@@ -13,12 +33,12 @@
     <h4 class="page-header">Chats</h4>
     <div id="main-chat" class="row">
         <div class="col">
-            <a href="#" class="thumbnail">
+            <a href="" class="thumbnail col-xs-6 col-md-3" ng-click="showMakeChatRoom()">
                 <img src="../images/Plus.png" />
             </a>
         </div>
         <div class="col" ng-repeat="conversation in conversationPreviews">
-            <a href="#" class="thumbnail">
+            <a href="" class="thumbnail col-xs-6 col-md-3">
                 <div class="count-bubble" ng-show="conversation.unreadCount > 0">
                     <span>{{conversation.unreadCount}}</span>
                 </div>
@@ -35,6 +55,10 @@
 <style>
     body{
         padding-top: 0;
+    }
+
+    #main-chat a.thumbnail {
+        margin: 15px;
     }
 
 </style>
