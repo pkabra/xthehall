@@ -69,7 +69,7 @@ $scope.click = function(index)
         // ProfileService.getNickname();
 
 
-        $scope.nickname = "Michael";
+        $scope.nickname = ProfileService.getNickname();
         $scope.nickname_width = $scope.onWrite($scope.nickname);
         $scope.hospital_list = JSON.parse('["Mott Children\'s Hospital", "Univ. of Michigan Hospital", "Ohio State Hospital"]');
         $scope.interest_list = JSON.parse('["Soccer", "Football", "Basketball"]');
