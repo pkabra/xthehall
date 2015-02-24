@@ -8,6 +8,7 @@ var app = angular.module('XtheHall', [
   'ngRoute',
   'parse-angular',
   'parse-angular.enhance',
+  'ui.bootstrap'
 ]).config(function ( $routeProvider ) {
   $routeProvider
     .when('/home', {
