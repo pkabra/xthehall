@@ -1,6 +1,8 @@
 angular.module('XtheHall')
-.controller('ChatController', function($scope, AuthService, InstantMessageService, ProfileService, HistoryService) {
+.controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService) {
     $scope.title = $scope.user.id;
+
+    $scope.chat_room = $location.path.chatid;
 
     var recipient = "12345";
     $scope.messages = [];

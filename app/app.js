@@ -1,3 +1,9 @@
+var Authenticator = function($q, AuthService) {
+  var deferred = $q.defer();
+  AuthService.watchStatusChange(deferred);
+  return deferred.promise;
+}
+
 var app = angular.module('XtheHall', [
   'ngRoute',
   'parse-angular',
@@ -26,11 +32,15 @@ var app = angular.module('XtheHall', [
       controller: 'ChatController',
       controllerAs: 'chat',
       resolve: {
-        authenticate: function($q, AuthService) {
-          var deferred = $q.defer();
-          AuthService.watchStatusChange(deferred);
-          return deferred.promise;
-        }
+        authenticate: Authenticator
+      }
+    })
+    .when('/chat/:chatid', {
+      templateUrl: 'views/chat.html',
+      controller: 'ChatController',
+      controllerAs: 'chat',
+      resolve: {
+        authenticate: Authenticator
       }
     })
     .when('/login', {

@@ -2,7 +2,7 @@ app.factory('HistoryService', function() {
 
   var Chatrooms = Parse.Object.extend({
     className: 'Chatrooms',
-    attrs: ['room_id', 'users']
+    attrs: ['users']
   });
 
   var MessageHistory = Parse.Object.extend({
@@ -25,11 +25,14 @@ app.factory('HistoryService', function() {
       history.save(null);
     },
 
-    create_room: function (room_id, users) {
+    create_room: function (users, success) {
       var room = new Parse.Object('Chatrooms');
-      room.setRoom_id(room_id);
       room.setUsers(users);
-      room.save(null);
+      room.save(null, {
+        success: function (room) {
+          success(room);
+        }
+      });
     },
 
     // Retrieves the chat history and return a promise.
