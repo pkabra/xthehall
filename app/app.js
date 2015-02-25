@@ -4,6 +4,12 @@ var Authenticator = function($q, AuthService) {
   return deferred.promise;
 }
 
+var RoomSetup = function ($route, $q, HistoryService) {
+  var deferred = $q.defer();
+  HistoryService.retrieveRoom($route.current.params.chatid, deferred);
+  return deferred.promise;
+}
+
 var app = angular.module('XtheHall', [
   'ngRoute',
   'parse-angular',
@@ -33,7 +39,7 @@ var app = angular.module('XtheHall', [
       controller: 'ChatController',
       controllerAs: 'chat',
       resolve: {
-        authenticate: Authenticator
+        authenticate: Authenticator,
       }
     })
     .when('/chat/:chatid', {
@@ -41,7 +47,8 @@ var app = angular.module('XtheHall', [
       controller: 'ChatController',
       controllerAs: 'chat',
       resolve: {
-        authenticate: Authenticator
+        authenticate: Authenticator,
+        setupRoom: RoomSetup
       }
     })
     .when('/login', {

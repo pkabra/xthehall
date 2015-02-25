@@ -1,21 +1,26 @@
 angular.module('XtheHall')
 .controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService) {
-    $scope.title = $scope.user.id;
+    var recipients = [];
 
-    // $scope.chat_room = $location.path.chatid;
+    $scope.room.users.forEach(function (u) {
+      if (u.attributes.fbid == $scope.user.id) return;
+      recipients.push(u.attributes.fbid);
+    });
 
-    var recipient = "12345";
     $scope.messages = [];
 
-    HistoryService.retrieve($scope.user.id, recipient, 5).then(
-        function(inhistory) {
-            for (var i = 0; i < inhistory.length; i++) {
-            $scope.messages.push({ incoming: true, user: "dilu", text: inhistory.message});
-        }
-        });
-
-    // Please DO NOT delete. This section contains example how to use 
-    // InstantMessageService, ProfileService, HistoryService
+    HistoryService.retrieveHistory($scope.room.id, 10)
+    .then(function(history) {
+      for (var i = 0; i < history.length; i++) {
+        var m = {
+          incoming: true,
+          user: $scope.room.users[history.sender].attributes.nickname || $scope.room.users[history.sender].attributes.fbid,
+          text: history.message
+        };
+        if (history.sender == $scope.user.id) m.incoming = false;
+        $scope.messages.push();
+      }
+    });
 
     var incomingmessageListener = function(message) {
         if ($scope.user.id != message.senderId) {
@@ -35,7 +40,6 @@ angular.module('XtheHall')
 
   $scope.sendMessage = function() {
       event.preventDefault();
-      var recipients = [recipient];
       var text = $('input#message').val();
 
       var outgoing = '<div class="row"><div class="col-xs-8 col-xs-offset-4 col-md-6 col-md-offset-6" ng-if="!message.incoming"><div class="message outgoing"><p>' + text + '</p></div></div></div>';
@@ -45,15 +49,6 @@ angular.module('XtheHall')
 
       console.log(recipients);
 
-      for (var i = 0; i < recipients.length; i++) {
-        HistoryService.save(recipients[i], $scope.user.id, text);
-    }
-};
-
-$scope.getHistory = function() {
-  HistoryService.retrieve('12345', $scope.user.id, 10).then(
-    function(history) {
-      console.log(history);
-  })
-}
+      HistoryService.save($scope.room.id, $scope.user.id, text);
+  };
 });
