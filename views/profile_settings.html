@@ -1,32 +1,32 @@
 
 <head>
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
 
-<style>
+  <style>
 
-.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: red;
-  cursor: inherit;
-  display: block;
-}
+    .btn-file {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      background: red;
+      cursor: inherit;
+      display: block;
+    }
 
 
-</style>
+  </style>
 
 
 </head>
@@ -38,50 +38,54 @@
 
 
 
-<p class="text-center"> Avatar </p>
+  <p class="text-center"> Avatar </p>
 
 
-<hr>
+  <hr>
 
 
-<div ng-show="!is_file_yes" class="input-group">
+  <div ng-show="!is_file_yes" class="input-group">
     <span class="input-group-btn">
-        <span class="btn btn-default btn-file">
-            Choose File&hellip; <input type="file" accept="image/*" id="image-input" file-model="myFile" ng-model="fileUpload" onchange="angular.element(this).scope().image_upload();"  type="file" multiple>
-        </span>
+      <span class="btn btn-default btn-file">
+        Choose File&hellip; <input type="file" accept="image/*" id="image-input" file-model="myFile" ng-model="fileUpload" onchange="angular.element(this).scope().image_upload();"  type="file" multiple>
+      </span>
     </span>
     <input type="text" class="form-control text-center" ng-model="avatar_img_name" readonly> 
-</div>
+  </div>
 
 
 
-<br><br>
+  <br><br>
 
-<div>
+  <div>
     <img id="image-container" style="width:200px;height:200px"/>
-</div>
+  </div>
 
-<br><br>
+  <br><br>
 
-<p class="text-center"> Nickname </p>
+  <p class="text-center"> Nickname </p>
 
-<hr>
+  <hr>
 
-<input ng-model="nickname" ng-click="click_nickname();" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>
+  <input ng-model="nickname" ng-click="click_nickname();" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>
 
-<br><br><br>
+  <br><br><br>
 
-<p class="text-center"> Hospital </p>
+  <p class="text-center"> Hospital </p>
 
-<hr>
+  <hr>
+
+<!-- 
+<select ng-model="hospital_select" class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">
+
+  <option ng-repeat="hospital in hospital_list"  value="{{hospital}}"> {{hospital}} </option>
+
+</select> -->
 
 
-<select class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">
-
-  <option ng-repeat="hospital in hospital_list" value="{{hospital}}"> {{hospital}} </option>
+<select ng-model="hospital_select" ng-options="hospital for hospital in hospital_list" class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">
 
 </select>
-
 
 
 <br><br><br>
@@ -97,29 +101,44 @@
 
 <div class="row">
 
-<div class="col-md-4"></div>
-<div class="col-md-4">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
 
-<ul class="list-group">
-  <li ng-repeat="interest in interest_list" ng-click="click($index);" class="list-group-item"> {{interest}} </li>
+    <ul class="list-group">
+      <li ng-repeat="interest in interest_list" ng-click="click($index);" class="list-group-item"> {{interest}} </li>
 
-    <li class="list-group-item">  <input ng-model="new_interest" ng-enter="add_interest(new_interest, interest_list);" style="width: 400px; text-align: center; border-style:none;"> </input> </li>
-</ul>
-<!-- <input type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; [[num]]" value="[[ numStudents ]]" readonly> -->
+      <li class="list-group-item">  <input ng-model="new_interest" ng-enter="add_interest(new_interest, interest_list);" style="width: 400px; text-align: center; border-style:none;"> </input> </li>
+    </ul>
+    <!-- <input type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; [[num]]" value="[[ numStudents ]]" readonly> -->
+
+  </div>
+
 
 </div>
 
 
+<p class="text-center">
+ <br>
+ <button ng-click="save(); save_click = true;" class="btn btn-success" style="height: 85px; width: 200px; font-size:40px;"> Submit </button>
+</p>
+<br>
+
+<div class="row">
+
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+
+  <div ng-show="save_click" class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Thank You! </strong> Your information has been saved.
+  </div>
+
+  </div>
+
 </div>
 
-
-       <p class="text-center">
-       <br>
-          <button ng-click="save()" class="btn btn-success" style="height: 85px; width: 200px; font-size:40px;"> Submit </button>
-        </p>
-        <br>
-        <br>
-        <br>
+<br>
+<br>
 
 </div>
 <!-- </html> -->
