@@ -1,5 +1,20 @@
 app.factory('HistoryService', function($rootScope) {
+// Profile Data
+var Profile = Parse.Object.extend({
+  className: 'Profile',
+  attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info']
+});
 
+// Chat and Messaging Data
+var Chatrooms = Parse.Object.extend({
+  className: 'Chatrooms',
+  attrs: ['users']
+});
+
+var MessageHistory = Parse.Object.extend({
+  className: 'MessageHistory',
+  attrs: ['room_id', 'sender_id', 'message']
+});
   return {
     // Save chat history
     // Para:

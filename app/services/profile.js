@@ -1,4 +1,9 @@
 app.factory('ProfileService', function($q) {
+// Profile Data
+var Profile = Parse.Object.extend({
+  className: 'Profile',
+  attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info']
+});
 
   // singleton
   var profile = null;

@@ -30,7 +30,7 @@ angular.module('XtheHall')
         };
 
         $scope.createNewChatRoom = function () {
-            var users = ["1780580748834035", "10152671846647321"];
+            var users = ["10152671846647321", "10153018577905412"];
             var success = function (room) {
                 console.log(room);
                 $location.path("/chat/" + room.id);
