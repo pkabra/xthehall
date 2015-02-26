@@ -12,9 +12,15 @@ angular.module('XtheHall')
     HistoryService.retrieveHistory($scope.room.id, 10)
     .then(function(history) {
       for (var i = 0; i < history.length; i++) {
+        var user;
+        $scope.room.users.forEach(function (u) {
+          if (u.attributes.fbid == history.sender) {
+            user = u;
+          }
+        });
         var m = {
           incoming: true,
-          user: $scope.room.users[history.sender].attributes.nickname || $scope.room.users[history.sender].attributes.fbid,
+          user: user.attributes.nickname || user.attributes.fbid,
           text: history.message
         };
         if (history.sender == $scope.user.id) m.incoming = false;
