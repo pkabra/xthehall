@@ -14,7 +14,7 @@ angular.module('XtheHall')
       for (var i = 0; i < history.length; i++) {
         var user;
         $scope.room.users.forEach(function (u) {
-          if (u.attributes.fbid == history.sender) {
+          if (u.attributes.fbid == history[i].sender) {
             user = u;
           }
         });
