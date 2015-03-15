@@ -10,7 +10,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
         InstantMessageService.loginSinch(response.id);
         ProfileService.init(response.id).then(function() {
           if (!angular.isUndefined(d))
-          d.resolve();
+            d.resolve();
         });
       });
     })

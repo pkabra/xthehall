@@ -1,9 +1,9 @@
 app.factory('ProfileService', function($q) {
-// Profile Data
-var Profile = Parse.Object.extend({
-  className: 'Profile',
-  attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info']
-});
+  // Profile Data
+  var Profile = Parse.Object.extend({
+    className: 'Profile',
+    attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info', 'location']
+  });
 
   // singleton
   var profile = null;
@@ -23,17 +23,23 @@ var Profile = Parse.Object.extend({
           if (result.length == 0) {
             profile = new Parse.Object('Profile');
             profile.setFbid(id.toString());
-            profile.save(null).then(
-              function(profile) {
-                console.log('Successfully created a new profile');
-              },
-              function(profile, error) {
-                console.log('Failed to create a new profile with error ' + error);
-              });
           } else {
             profile = result[0];
           }
-          deferred.resolve();
+          // update the profile
+          Parse.GeoPoint.current({
+            success: function (point) {
+                profile.set('location', point);
+                profile.save(null).then(
+                  function(profile) {
+                    console.log('Successfully update a new profile');
+                  },
+                  function(profile, error) {
+                    console.log('Failed to update profile with error ' + error);
+                  });
+                deferred.resolve();
+            }
+          });
         },
         function(error) {
           console.log('Failed to retrieve profile with id' + id.toString());
@@ -67,6 +73,10 @@ var Profile = Parse.Object.extend({
       return profile.getHospital_info();
     },
 
+    getLocation: function() {
+      return profile.getLocation();
+    },
+
     setImage : function(files) {
       var deferred = $q.defer();
       if (files.length > 0) {
@@ -87,8 +97,29 @@ var Profile = Parse.Object.extend({
       return deferred.promise;
     },
 
-    setInterest : function(interest) {
-      profile.setInterest(interest);
+    setInterest : function(interestList) {
+      if (!Array.isArray(interestList)) {
+        console.log('setInterest takes array argument');
+        return;
+      }
+      profile.setInterest(interestList);
+      profile.save();
+    },
+
+    addInterest : function(interest) {
+      if (profile.getInterest() == null) {
+        var interestList = [];
+        profile.setInterest(interestList);
+      }
+      profile.addUnique('interest', interest);
+      profile.save();
+    },
+
+    removeInterest : function(interest) {
+      if (profile.getInterest() == null) {
+        return;
+      }
+      profile.remove('interest', interest);
       profile.save();
     },
 

@@ -77,11 +77,11 @@ var app = angular.module('XtheHall', [
 
   FB.init({
     appId: '1559290244313333',
-    cookie: true,  // enable cookies to allow the server to access 
+    cookie: true,  // enable cookies to allow the server to access
     xfbml: true,  // parse social plugins on this page
     version: 'v2.1' // use version 2.1
   });
 
-  // initialize the parse 
+  // initialize the parse
   Parse.initialize("OBaEpcoBmjrtCpLUDLF8DxjsLaqd581mWrUMvhe2", "GNyr0W0eom463gV2vkjr2NhH10Zu7iR1grK55b3d");
 });

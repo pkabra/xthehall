@@ -2,14 +2,14 @@ angular.module('XtheHall')
   .controller('HomeController', function($scope, AuthService, InstantMessageService, ProfileService, HistoryService) {
     $scope.title = "Hello World";
 
-    // Please DO NOT delete. This section contains example how to use 
+    // Please DO NOT delete. This section contains example how to use
     // InstantMessageService, ProfileService, HistoryService
     var incomingmessageListener = function(message) {
       $('div#chatArea').append('<div class="msgRow" id="'+message.messageId+'"></div><div class="clearfix"></div>');
 
       $('div.msgRow#'+message.messageId)
           .append([
-              '<div id="from">from: '+message.senderId+'</div>', 
+              '<div id="from">from: '+message.senderId+'</div>',
               '<div id="textBody">'+message.textBody+'</div>',
               '<div class="recipients">delivered: </div>'
           ]);
@@ -49,7 +49,6 @@ angular.module('XtheHall')
           console.log(history);
         });
     };
-
 
     // Profile image upload and retrieval example.
     $scope.uploadImage = function(files) {

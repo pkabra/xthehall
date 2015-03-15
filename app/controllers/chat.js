@@ -50,7 +50,7 @@ angular.module('XtheHall')
 
       var outgoing = '<div class="row"><div class="col-xs-8 col-xs-offset-4 col-md-6 col-md-offset-6" ng-if="!message.incoming"><div class="message outgoing"><p>' + text + '</p></div></div></div>';
       $('div#chatArea').append($(outgoing));
-      
+
       InstantMessageService.sendMessage(recipients, text);
 
       console.log(recipients);

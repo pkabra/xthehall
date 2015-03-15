@@ -54,7 +54,7 @@ angular.module('XtheHall')
 
 
 //Change input width to match width of characters.
-$scope.onWrite = function (text) 
+$scope.onWrite = function (text)
 {
   width = "width: " + (text.length * 22 + 50).toString() + "px;";
   return width;
@@ -130,7 +130,7 @@ $scope.save = function() {
   console.log(JSON.stringify($scope.hospital_select));
 
   ProfileService.setNickname($scope.nickname);
-  ProfileService.setInterest(JSON.stringify($scope.interest_list));
+  ProfileService.setInterest($scope.interest_list);
   ProfileService.setHospital_info($scope.hospital_select);
   ProfileService.setImage(fileInput.files);
 };
