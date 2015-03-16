@@ -1,10 +1,54 @@
 
+
 <head>
 
   <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
 
   <style>
+
+  .autocomplete{
+    width: 100%;
+    position: relative;
+  }
+
+  .autocomplete input{
+    font-size: 1.2em;
+    width: 100%;
+    padding:0.4em;
+  }
+
+  .autocomplete ul{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border-left: 1px solid #888;
+    border-right: 1px solid #888;
+    border-bottom: 1px solid #888;
+    z-index: 1;
+  }
+
+  .autocomplete li{
+    text-align: left;
+    list-style:none;
+    width: 100%;
+    padding:0.4em;
+    background-color: #fff;
+  }
+
+  .autocomplete li.active{
+    width: 100%;
+    background-color: #4bf;
+  }
+
+  .autocomplete .highlight {
+    background-color: #E2E2E2;
+  }
+
+  .autocomplete li.active .highlight {
+    background: #666;
+    color: #fff;
+  }
 
     .btn-file {
       position: relative;
@@ -25,6 +69,26 @@
       display: block;
     }
 
+    .DocumentOuter
+{
+  overflow-x:hidden;
+}
+.DocumentList
+{
+    overflow-x:auto;
+    overflow-y:visible;
+    
+    
+
+    width:100%;
+}
+.DocumentItem
+{
+    
+    margin:3px;
+    
+}
+
 
   </style>
 
@@ -32,11 +96,29 @@
 </head>
 
 
+
+
+
+
+
+<nav class="navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <span class="navbar-brand">XtheHall</span>
+        </div>
+    </div>
+</nav>
+
+<br>
+
 <div   class="form-inline text-center" style="font-size:20px;" > 
 
 
 
+<div class="row">
 
+
+<div class="col-md-6">
 
   <p class="text-center"> Avatar </p>
 
@@ -63,6 +145,15 @@
 
   <br><br>
 
+
+
+</div>
+
+
+<div class="col-md-6">
+
+
+
   <p class="text-center"> Nickname </p>
 
   <hr>
@@ -88,7 +179,16 @@
 </select>
 
 
-<br><br><br>
+
+</div>
+
+</div>
+
+
+
+
+
+
 
 <p class="text-center"> Interests </p>
 
@@ -139,6 +239,12 @@
 
 <br>
 <br>
+
+{{movies}}
+
+blah
+ <autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete>
+ blah
 
 </div>
 <!-- </html> -->

@@ -34,6 +34,18 @@ var app = angular.module('XtheHall', [
         }
       }
     })
+    .when('/find', {
+      templateUrl: 'views/find.html',
+      controller: 'FindController',
+      controllerAs: 'find',
+      resolve: {
+        authenticate: function($q, AuthService) {
+          var deferred = $q.defer();
+          AuthService.watchStatusChange(deferred);
+          return deferred.promise;
+        }
+      }
+    })
     .when('/chat', {
       templateUrl: 'views/chat.html',
       controller: 'ChatController',
