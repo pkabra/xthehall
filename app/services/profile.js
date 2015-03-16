@@ -20,6 +20,7 @@ app.factory('ProfileService', function($q) {
       query.equalTo('fbid', id.toString());
       query.find().then(
         function(result) {
+          console.log("Finding user...");
           if (result.length == 0) {
             profile = new Parse.Object('Profile');
             profile.setFbid(id.toString());
@@ -27,8 +28,10 @@ app.factory('ProfileService', function($q) {
             profile = result[0];
           }
           // update the profile
+          console.log("Initializing GeoPoint service..");
           Parse.GeoPoint.current({
             success: function (point) {
+                console.log("GeoPoint successful...")
                 profile.set('location', point);
                 profile.save(null).then(
                   function(profile) {
@@ -136,6 +139,28 @@ app.factory('ProfileService', function($q) {
     setHospital_info : function(hospital_info) {
       profile.setHospital_info(hospital_info);
       profile.save();
+    },
+
+    // Find a single user
+    getUserWithId: function(user_id) {
+      var deferred = $q.defer();
+      var query = new Parse.Query('Profile');
+      query.equalTo('objectId', user_id);
+      query.find().then(function(user) {
+        deferred.resolve(user);
+      });
+      return deferred.promise;
+    },
+
+    // Find an array of users
+    getUsersWithIds: function (user_ids) {
+      var deferred = $q.defer();
+      var query = new Parse.Query('Profile');
+      query.containedIn('objectId', user_ids);
+      query.find().then(function (users) {
+        deferred.resolve(users);
+      });
+      return deferred.promise;
     }
   };
 });

@@ -21,7 +21,7 @@
   <div class="row" ng-repeat="message in messages">
     <div class="col-xs-8 col-md-6" ng-if="message.incoming">
       <div class="message incoming">
-        <p class="user">{{message.user}}</p>
+        <p class="user">{{message.user}} <span class="timestamp">{{message.time}}</span></p>
         <p class="text">{{message.text}}</p>
       </div>
     </div>
@@ -36,7 +36,7 @@
   <div class="container-fluid">
     <div class="row message-box">
       <div class="col-xs-10">
-        <input type="text" class="form-control" id="message" placeholder="Type your message here...">
+        <input type="text" class="form-control" id="message" placeholder="Type your message here..." ng-keydown="$event.keyCode == 13 && sendMessage()">
       </div>
       <div class="col-xs-1">
         <button type="button" class="btn btn-default">

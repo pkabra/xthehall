@@ -15,7 +15,9 @@
                 <h4 class="modal-title">Initialize Chat</h4>
             </div>
             <div class="modal-body">
-                <p>Who is going to be your new best friend?</p>
+                <p>Start typing in who you'd like to start chatting with</p>
+                <select id="chatUserSelect" class="form-control multiselect multiselect-primary" multiple="multiple">
+                </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -37,8 +39,8 @@
                 <img src="../images/Plus.png" />
             </a>
         </div>
-        <div class="col" ng-repeat="conversation in conversationPreviews">
-            <a href="" class="thumbnail col-xs-6 col-md-3">
+        <div class="col" ng-repeat="conversation in conversationPreviews | orderBy: '-timestamp'">
+            <a href="#/chat/{{conversation.id}}" class="thumbnail col-xs-6 col-md-3">
                 <div class="count-bubble" ng-show="conversation.unreadCount > 0">
                     <span>{{conversation.unreadCount}}</span>
                 </div>

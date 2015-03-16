@@ -2,37 +2,46 @@
  * Created by Adam on 2/19/15.
  */
 angular.module('XtheHall')
-    .controller('MainController', function($scope, $location, $http, HistoryService) {
-        $scope.conversationPreviews = [
-            {
-                unreadCount: 2,
-                timestamp: "5:30 am",
-                messagePreview: "Ya, this is a message.  Wanna fight about it?",
-                picUrl: "../images/SmallLogo1.png"
-            },
-            {
-                unreadCount: 0,
-                timestamp: "12:30 pm",
-                messagePreview: "Yoooooo.  Wazzup, dude?",
-                picUrl: "http://fc01.deviantart.net/fs9/i/2006/007/3/4/Bee_by_nicobou.jpg"
-            },
-            {
-                unreadCount: 8,
-                timestamp: "12:44 pm",
-                messagePreview: "Booooom.  Shakalakalaka.",
-                picUrl: "http://th01.deviantart.net/fs9/PRE/i/2006/032/2/b/toucan_by_nicobou.jpg"
-            }
-        ];
+    .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService) {
+        $scope.conversationPreviews = [];
+
+        HistoryService.getActiveChats($scope.user.id).then(function (rooms) {
+            _.each(rooms, function (r) {
+                HistoryService.retrieveHistory(r.id, 1).then(function(m) {
+                    if (_.isEmpty(m)) return;
+                    $scope.conversationPreviews.push({
+                        id: r.id,
+                        unreadCount: 2,
+                        timestamp: m[0].time.toLocaleDateString() + " " + m[0].time.toLocaleTimeString(),
+                        messagePreview: m[0].message,
+                        picUrl: "../images/SmallLogo1.png"
+                    });
+                });
+            });
+        });
+
         $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
+
+        MatchService.findUsersByLocation(10).then(function(users) {
+            var selectUser = $('#chatUserSelect');
+            _.each(users, function (u) {
+                if ($scope.user.id == u.attributes.fbid) return; // Skip yourself
+
+                // Add user to list of choosable chat partners
+                var name = _.isEmpty(u.attributes.nickname) ? u.attributes.fbid : u.attributes.nickname;
+                selectUser.append("<option value='" + u.attributes.fbid + "'>" + name + "</option>");
+            });
+            $('#chatUserSelect').select2();
+        });
 
         $scope.showMakeChatRoom = function() {
             $('#createChatRoomModal').modal('show');
         };
 
         $scope.createNewChatRoom = function () {
-            var users = ["10152671846647321", "10153018577905412"];
+            var users = $('#chatUserSelect').val();
+            users.push($scope.user.id);
             var success = function (room) {
-                console.log(room);
                 $location.path("/chat/" + room.id);
             };
             HistoryService.create_room(users, success);

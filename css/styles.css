@@ -3,6 +3,10 @@ body {
 	padding-top: 60px;
 }
 
+#chatArea {
+    padding-bottom: 70px;
+}
+
 .chat {
 	padding-bottom:60px;
 }
@@ -29,6 +33,12 @@ body {
 .incoming .user {
 	border-bottom: 1px solid #fff;
 	margin-bottom: 5px;
+}
+
+.incoming .user .timestamp {
+    float: right;
+    font-size: 14px;
+    line-height: 30px;
 }
 
 footer {
@@ -77,8 +87,9 @@ div.message-preview span {
 div.chat-id-timestamp {
     position: absolute;
     bottom: 7px;
-    left: 7px;
+    left: 10px;
     color: gray;
+    font-size: 12px;
 }
 
 div.chat-id-pic {

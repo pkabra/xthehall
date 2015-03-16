@@ -27,11 +27,7 @@ var app = angular.module('XtheHall', [
       controller: 'ProfileSettingsController',
       controllerAs: 'profile_settings',
       resolve: {
-        authenticate: function($q, AuthService) {
-          var deferred = $q.defer();
-          AuthService.watchStatusChange(deferred);
-          return deferred.promise;
-        }
+        authenticate: Authenticator
       }
     })
     .when('/chat', {
@@ -58,7 +54,10 @@ var app = angular.module('XtheHall', [
     .when('/main', {
       templateUrl: 'views/main.html',
       controller: 'MainController',
-      controllerAs: 'main'
+      controllerAs: 'main',
+      resolve: {
+        authenticate: Authenticator
+      }
     })
     .otherwise({
       redirectTo: '/home'

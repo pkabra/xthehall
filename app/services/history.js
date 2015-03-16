@@ -1,4 +1,4 @@
-app.factory('HistoryService', function($rootScope) {
+app.factory('HistoryService', function($rootScope, $q) {
 // Profile Data
 var Profile = Parse.Object.extend({
   className: 'Profile',
@@ -57,7 +57,9 @@ var MessageHistory = Parse.Object.extend({
         var userQuery = new Parse.Query('Profile');
         userQuery.containedIn('fbid', results[0].attributes.users);
         userQuery.find().then(function(results) {
-          $rootScope.room.users = results;
+          _.each(results, function (r) {
+            $rootScope.room.users[r.attributes.fbid] = r;
+          });
           deferred.resolve();
         });
       });
@@ -74,7 +76,7 @@ var MessageHistory = Parse.Object.extend({
       var deferred = new $.Deferred();
       var query = new Parse.Query('MessageHistory');
       query.equalTo('room_id', room_id);
-      query.descending('createdAt');
+      query.ascending('createdAt');
       query.limit(num);
 
       query.find().then(
@@ -88,6 +90,16 @@ var MessageHistory = Parse.Object.extend({
         });
 
       return deferred.promise();
+    },
+
+    getActiveChats: function (user) {
+      var deferred = $q.defer();
+      var query = new Parse.Query('Chatrooms');
+      query.equalTo('users', user);
+      query.find().then(function (rooms) {
+        deferred.resolve(rooms);
+      });
+      return deferred.promise;
     }
   };
 

@@ -45,7 +45,7 @@ app.factory('MatchService', function($q, ProfileService) {
       });
 
       return deferred.promise;
-    }
+    },
 
     // return a promise containning a list of users limited by the num
     // and sorted by the number of common interests
