@@ -35,11 +35,7 @@ var app = angular.module('XtheHall', [
       controller: 'FindController',
       controllerAs: 'find',
       resolve: {
-        authenticate: function($q, AuthService) {
-          var deferred = $q.defer();
-          AuthService.watchStatusChange(deferred);
-          return deferred.promise;
-        }
+
       }
     })
     .when('/chat', {
