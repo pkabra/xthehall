@@ -20,29 +20,23 @@ app.factory('ProfileService', function($q) {
       query.equalTo('fbid', id.toString());
       query.find().then(
         function(result) {
-          console.log("Finding user...");
           if (result.length == 0) {
             profile = new Parse.Object('Profile');
             profile.setFbid(id.toString());
+            profile.save(null).then(
+              function(profile) {
+                console.log('Successfully update location');
+                deferred.resolve();
+              },
+              function(profile, error) {
+                console.log('Failed to update lcoation with error ' + error);
+                deferred.resolve();
+              });
           } else {
             profile = result[0];
+            deferred.resolve();
           }
-          // update the profile
-          console.log("Initializing GeoPoint service..");
-          Parse.GeoPoint.current({
-            success: function (point) {
-                console.log("GeoPoint successful...")
-                profile.set('location', point);
-                profile.save(null).then(
-                  function(profile) {
-                    console.log('Successfully update a new profile');
-                  },
-                  function(profile, error) {
-                    console.log('Failed to update profile with error ' + error);
-                  });
-                deferred.resolve();
-            }
-          });
+
         },
         function(error) {
           console.log('Failed to retrieve profile with id' + id.toString());
@@ -139,6 +133,22 @@ app.factory('ProfileService', function($q) {
     setHospital_info : function(hospital_info) {
       profile.setHospital_info(hospital_info);
       profile.save();
+    },
+
+    updateLocation : function() {
+      // update the profile
+      Parse.GeoPoint.current({
+        success: function (point) {
+          profile.set('location', point);
+          profile.save(null).then(
+            function(profile) {
+              console.log('Successfully update location');
+            },
+            function(profile, error) {
+              console.log('Failed to update lcoation with error ' + error);
+            });
+        }
+      });
     },
 
     // Find a single user
