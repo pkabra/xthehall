@@ -1,11 +1,6 @@
 angular.module('XtheHall')
 .controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService) {
-  var recipients = [];
-
-  _.each($scope.room.users, function (u) {
-    if (u.attributes.fbid == $scope.user.id) return;
-    recipients.push(u.attributes.fbid);
-  });
+  var recipients = _.keys($scope.room.users);
 
   $scope.messages = [];
 
@@ -24,18 +19,16 @@ angular.module('XtheHall')
   });
 
   var incomingmessageListener = function(message) {
-      if ($scope.user.id != message.senderId) {
-          HistoryService.save($scope.user.id, message.senderId, message.textBody);
-          var t = new Date();
-          var m = {
-            incoming: true,
-            user: message.senderId,
-            time: t.toLocaleDateString() + " " + t.toLocaleTimeString(),
-            text: message.textBody
-          };
-          $scope.messages.push(m);
-          window.scrollTo(0,document.body.scrollHeight);
-      }
+    if (message.textBody.room != $scope.room.id) return;
+    var t = new Date();
+    var m = {
+      incoming: $scope.user.id != message.senderId,
+      user: message.senderId,
+      time: t.toLocaleDateString() + " " + t.toLocaleTimeString(),
+      text: message.textBody.text
+    };
+    $scope.messages.push(m);
+    $scope.$apply();
   };
 
   var deliveredMessageListener = function() {
@@ -51,20 +44,8 @@ angular.module('XtheHall')
     var text = $('input#message').val();
     $('input#message').val("");
     if (_.isEmpty(text)) return;
-    var t = new Date();
-    var m = {
-      incoming: false,
-      user: $scope.user.id,
-      time: t.toLocaleDateString() + " " + t.toLocaleTimeString(),
-      text: text
-    };
-    $scope.messages.push(m);
 
-    InstantMessageService.sendMessage(recipients, text);
-
-    console.log(recipients);
-
+    InstantMessageService.sendMessage(recipients, {room: $scope.room.id, text: text});
     HistoryService.save($scope.room.id, $scope.user.id, text);
-    window.scrollTo(0,document.body.scrollHeight);
   };
 });

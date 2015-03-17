@@ -1,4 +1,5 @@
-var Authenticator = function($q, AuthService) {
+var Authenticator = function($rootScope, $q, AuthService) {
+  if (!_.isEmpty($rootScope.user)) return;
   var deferred = $q.defer();
   AuthService.watchStatusChange(deferred);
   return deferred.promise;
