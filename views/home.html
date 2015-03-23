@@ -1,32 +1,47 @@
-<h1> {{ title }} </h1>
 
-<!-- Please do not delete -->
-<fb:login-button scope="public_profile,email" onlogin="angular.element('html').injector().get('AuthService').watchStatusChange()">
-</fb:login-button>
 
-<div id="status">
+<!--<div id="status">-->
+<!--</div>-->
+
+<!--<button onclick="FB.logout()">Logout</button>-->
+
+<!--<div class="frame">-->
+  <!--<h3>Chat</h3>-->
+  <!--<div id="chat">-->
+      <!--<form id="newMessage">-->
+          <!--<input id="recipients" placeholder="Recipients (separate with space)"><br>-->
+          <!--<input id="message" placeholder="message"><br>-->
+          <!--<button id="sendMsg" ng-click="sendMessage()">Send</button>-->
+      <!--</form>-->
+      <!--<div id="chatArea">-->
+      <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<!--<button ng-click="getHistory()">GetHistory</button>-->
+
+<!--<input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files);"/>-->
+
+<!--<img ng-src="{{ imageUrl }}">-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="login-pane">
+                <img class="logo" src="../images/Logo2.png" alt="">
+                <form class="form-signin" action="" method="">
+                    <input type="text" class="form-control" placeholder="Username" required autofocus>
+                    <input type="password" class="form-control" placeholder="Password" required>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In" />
+                </form>
+                <form class="form-signin">
+                    <input type="submit" class="btn btn-lg btn-facebook btn-block" value="Facebook Login" />
+                </form>
+                <p id="create-account-btn" class="text-center"><a href="">Need an Account?</a></p>
+                <!-- Please do not delete -->
+                <fb:login-button scope="public_profile,email" onlogin="angular.element('html').injector().get('AuthService').watchStatusChange()">
+                </fb:login-button>
+            </div>
+        </div>
+    </div>
 </div>
-
-<button onclick="FB.logout()">Logout</button>
-
-<div class="frame">
-  <h3>Chat</h3>
-  <div id="chat">
-      <form id="newMessage">
-          <input id="recipients" placeholder="Recipients (separate with space)"><br>
-          <input id="message" placeholder="message"><br>
-          <button id="sendMsg" ng-click="sendMessage()">Send</button>
-      </form>
-      <div id="chatArea">
-      </div>
-  </div>
-</div>
-
-<button ng-click="getHistory()">GetHistory</button>
-
-<input type="file" name="file" onchange="angular.element(this).scope().uploadImage(this.files);"/>
-
-<img ng-src="{{ imageUrl }}">
-
-<button ng-click="getLocaiton()">Get Location</button>
-<div id='loc'></div>

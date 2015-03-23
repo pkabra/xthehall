@@ -7,19 +7,29 @@ angular.module('XtheHall')
 
         HistoryService.getActiveChats($scope.user.id).then(function (rooms) {
             _.each(rooms, function (r) {
-                HistoryService.retrieveHistory(r.id, 1).then(function(m) {
+                HistoryService.retrieveHistory(r.id, 1).then(function (m) {
                     if (_.isEmpty(m)) return;
                     $scope.conversationPreviews.push({
                         id: r.id,
                         unreadCount: 2,
                         timestamp: m[0].time.toLocaleDateString() + " " + m[0].time.toLocaleTimeString(),
                         messagePreview: m[0].message,
-                        picUrl: "../images/SmallLogo1.png"
+                        picUrl: "../images/SmallLogo1.png",
+                        friends: ['Emily', 'Hannah', 'Bradley', 'Stacey'],
+                        friendString: ''
+                    });
+                    $scope.conversationPreviews.forEach(function (conversation, conversationIndex, conversationArray) {
+                        var friendString = "";
+                        conversation.friends.forEach(function (friend, friendIndex, friendArray) {
+                            friendString += friend;
+                            if (friendIndex < friendArray.length - 1)
+                                friendString += ', ';
+                        });
+                        conversation.friendString = friendString;
                     });
                 });
             });
         });
-
         $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
 
         MatchService.findUsersByLocation(10).then(function(users) {
@@ -37,7 +47,6 @@ angular.module('XtheHall')
         $scope.showMakeChatRoom = function() {
             $('#createChatRoomModal').modal('show');
         };
-
         $scope.createNewChatRoom = function () {
             var users = $('#chatUserSelect').val();
             users.push($scope.user.id);

@@ -69,18 +69,32 @@ footer {
     box-shadow: 0 0 0 2pt #C0392B;
 }
 
+div.message-title {
+    max-width: 180px;
+    margin: 0 10px 0 10px;
+}
+
+div.message-title span {
+    display: inline-block;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 div.message-preview {
-    margin: 10px 5px 0 5px;
+    margin: 5px 5px 0 5px;
     padding: 5px;
     text-align: center;
     border-radius: 25px;
-    max-height: 130px;
-    min-height: 130px;
+    max-height: 100px;
+    min-height: 100px;
     background: #F1C40F;
     box-shadow: 0 0 0 2pt #F39C12;
 }
 
 div.message-preview span {
+    text-overflow: ellipsis;
     color: white;
 }
 
@@ -101,7 +115,7 @@ div.chat-id-pic {
     position: absolute;
     bottom: 7px;
     right: 7px;
-    box-shadow: 0 0 0 2pt #bdc3c7;
+    box-shadow: 0 0 0 1pt #bdc3c7;
 }
 
 .thumbnail {
@@ -126,4 +140,47 @@ ul#main-topic-list {
     list-style-type: none;
     padding-right: 20px;
     padding-left: -20px;
+}
+
+.form-signin
+{
+    max-width: 330px;
+    padding: 0 15px 0 15px;
+    margin: 0 auto;
+}
+.form-signin .form-control
+{
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin input
+{
+    margin-bottom: 10px;
+}
+
+.login-pane
+{
+    margin-top: 40px;
+    padding: 40px 0 20px 0;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 0 1pt #bdc3c7;
+}
+
+.logo
+{
+    width: 300px;
+    height: 150px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+#create-account-btn {
+    margin-top: 20px;
 }
