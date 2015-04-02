@@ -7,7 +7,7 @@
 // Profile Data
 var Profile = Parse.Object.extend({
 	className: 'Profile',
-	attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info']
+	attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info', 'location', 'release_date']
 });
 
 // Chat and Messaging Data

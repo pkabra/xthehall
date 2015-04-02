@@ -2,7 +2,7 @@ app.factory('ProfileService', function($q) {
   // Profile Data
   var Profile = Parse.Object.extend({
     className: 'Profile',
-    attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info', 'location']
+    attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info', 'location', 'release_date']
   });
 
   // singleton
@@ -70,6 +70,10 @@ app.factory('ProfileService', function($q) {
       return profile.getHospital_info();
     },
 
+    getReleaseDate: function() {
+      return profile.getReleaseDate();
+    },
+
     getLocation: function() {
       return profile.getLocation();
     },
@@ -132,6 +136,11 @@ app.factory('ProfileService', function($q) {
 
     setHospital_info : function(hospital_info) {
       profile.setHospital_info(hospital_info);
+      profile.save();
+    },
+
+    setReleaseDate : function(date) {
+      profile.setReleaseDate(date);
       profile.save();
     },
 
