@@ -87,7 +87,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
       });
 
       return deferred.promise;
-    }
+    },
 
     // Log in a user account with user name, password
     // params:
