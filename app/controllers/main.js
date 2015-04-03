@@ -4,6 +4,18 @@
 angular.module('XtheHall')
     .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService) {
         $scope.conversationPreviews = [];
+        $scope.accessibility = false;
+
+        $('#accessibility-toggle').on('click', function() {
+            $scope.accessibility = !$scope.accessibility;
+            if($scope.accessibility) {
+                $('body').addClass('accessibility');
+                $('h4').addClass('accessibility');
+            } else {
+                $('body').removeClass('accessibility');
+            }
+            $scope.$apply();
+        });
 
         HistoryService.getActiveChats($scope.user.id).then(function (rooms) {
             _.each(rooms, function (r) {
@@ -11,7 +23,6 @@ angular.module('XtheHall')
                     if (_.isEmpty(m)) return;
                     $scope.conversationPreviews.push({
                         id: r.id,
-                        unreadCount: 2,
                         timestamp: m[0].time.toLocaleDateString() + " " + m[0].time.toLocaleTimeString(),
                         messagePreview: m[0].message,
                         picUrl: "../images/SmallLogo1.png",
@@ -32,7 +43,7 @@ angular.module('XtheHall')
         });
         $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
 
-        MatchService.findUsersByLocation(10).then(function(users) {
+        MatchService.findUsersByLocation(10).then(function (users) {
             var selectUser = $('#chatUserSelect');
             _.each(users, function (u) {
                 if ($scope.user.id == u.attributes.fbid) return; // Skip yourself
@@ -44,7 +55,7 @@ angular.module('XtheHall')
             $('#chatUserSelect').select2();
         });
 
-        $scope.showMakeChatRoom = function() {
+        $scope.showMakeChatRoom = function () {
             $('#createChatRoomModal').modal('show');
         };
         $scope.createNewChatRoom = function () {
@@ -56,7 +67,17 @@ angular.module('XtheHall')
             HistoryService.create_room(users, success);
         };
 
-
+        $http.get('http://api.whatthetrend.com/api/v2/trends.json').
+            success(function(data, status, headers, config) {
+                debugger;
+                // this callback will be called asynchronously
+                // when the response is available
+            }).
+            error(function(data, status, headers, config) {
+                debugger;
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
         // var req = {
         //     headers: {
         //         Authorization: 'OAuth oauth_consumer_key="DC0sePOBbQ8bYdC8r4Smg",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1424744457",oauth_nonce="761193913",oauth_version="1.0",oauth_token="3057842603-X3h15gWyUzrgBAPWKjRLd5HGSSLewwmj9GHXQex",oauth_signature="Q7Wx%2F6vgYf0x4k2z4AlpbhkA6Jw%3D"',
