@@ -39,6 +39,18 @@ vertical-align: middle; color: transparent;
                font-size:96px;}
 
 
+.interestMatch {
+
+}
+
+.hospitalMatch {
+
+}
+
+.releaseMatch {
+
+}
+
 
 </style>
 
@@ -51,20 +63,26 @@ vertical-align: middle; color: transparent;
     </div>
 </nav>
 
-
+<!-- #FAEBCC -->
 
 <div class="container">
   <h1>Find Friends</h1>
 
   <hr>
 
+  <div class="row">
   <div class="col-md-3"/>
   <div class="col-md-6">
 
   <input class="form-control" ng-change="onType()" ng-click="clickQuery()" ng-model="queryString" style="text-align:center;"/>
+
+  <br>
+  <button ng-click="hospitalToggle()" class="btn btn-default text-center"> {{hospitalButtonText}} </button>
+  <br>
+  </div>
   </div>
 
-  <br><br><br>
+  <br>
   <p> <span style="background-color: #D6E9C6; color: #3C763D;"> &nbsp Special Match &nbsp </span>   <span style="background-color: #BCE8F1; color: #34495E;"> &nbsp Nearby Patient &nbsp </span> </p>
 
 
@@ -164,9 +182,6 @@ vertical-align: middle; color: transparent;
         </div>
     </div>
 </div>
-
-<button ng-click="btnClick()" popover="I appeared on mouse enter!" popover-trigger="mouseenter"> Test </button>
-
 
 
 <div class="row">

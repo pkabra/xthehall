@@ -1,5 +1,5 @@
 angular.module('XtheHall')
-.controller('FindController', function($scope, MatchService) {
+.controller('FindController', function($scope, MatchService, ProfileService) {
 
     // console.log(MatchService);
 
@@ -16,16 +16,29 @@ angular.module('XtheHall')
 
 
     $scope.queryString = "";
+    $scope.hospitalButtonText = "Show Only Patients from Same Hospital";
+    $scope.sameHospitalProfiles = [];
 
     MatchService.findUsersRandom(10).then(function(profiles)
         {
 
+            $scope.user_hospital = ProfileService.getHospital_info();
+
+
+            console.log("Wait.");
             console.log(profiles[0]);
             console.log("HAHA!");
             console.log(profiles[0].attributes.image);
-            console.log(profiles[0].attributes.image._url);
-            console.log(typeof(profiles[0].attributes.image));
+            console.log(profiles[0].createdAt);
+            console.log(profiles[1].createdAt - profiles[0].createdAt);
+            console.log(typeof(profiles[0].createdAt));
             console.log(profiles[0].attributes.nickname);
+
+            var date = new Date();
+            console.log("Huh?");
+            console.log(date);
+            console.log(typeof(date));
+
 
             $scope.profiles = profiles;
             $scope.visibleProfiles = $scope.profiles;
@@ -42,6 +55,32 @@ angular.module('XtheHall')
 
       }
 
+
+    $scope.hospitalToggle = function() {
+        if ($scope.hospitalButtonText == "Show Only Patients from Same Hospital")
+        {
+            $scope.hospitalButtonText = "Show All Patients"
+
+            if ($scope.sameHospitalProfiles.length == 0)
+            {
+                for (i = 0; i < $scope.profiles.length; i++)
+                {
+                    if ($scope.profiles[i].attributes.hospital_info == $scope.user_hospital)
+                    {
+                        $scope.sameHospitalProfiles.push($scope.profiles[i]);
+                    }
+                }
+            }
+
+            $scope.visibleProfiles = $scope.sameHospitalProfiles;
+        }
+        else
+        {
+            $scope.hospitalButtonText = "Show Only Patients from Same Hospital"
+
+            $scope.visibleProfiles = $scope.profiles;
+        }
+    };
 
     $scope.onType = function() {
 
