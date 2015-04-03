@@ -2,7 +2,7 @@
  * Created by Adam on 2/19/15.
  */
 angular.module('XtheHall')
-    .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService) {
+    .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService, VoiceService) {
         $scope.conversationPreviews = [];
         $scope.accessibility = false;
 
@@ -67,17 +67,27 @@ angular.module('XtheHall')
             HistoryService.create_room(users, success);
         };
 
-        $http.get('http://api.whatthetrend.com/api/v2/trends.json').
-            success(function(data, status, headers, config) {
-                debugger;
-                // this callback will be called asynchronously
-                // when the response is available
-            }).
-            error(function(data, status, headers, config) {
-                debugger;
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-            });
+        VoiceService.setCommands({
+            open: function (commands) {
+                if (_.contains(commands, "pod") &&
+                    _.contains(commands, "bay") &&
+                    _.contains(commands, "doors")) {
+                    alert("I'm sorry " + $scope.user.first_name + ", I'm afraid I can't do that");
+                };
+            },
+
+            chat: function (commands) {
+                _.each(commands, function (command) {
+                    if (!_.isNaN(parseInt(command))) {
+                        var chatid = parseInt(command) - 1;
+                        $location.path($($('.chats')[parseInt(command)]).find('a').attr('href').substr(1));
+                    }
+                });
+            }
+        });
+
+        VoiceService.start();
+
         // var req = {
         //     headers: {
         //         Authorization: 'OAuth oauth_consumer_key="DC0sePOBbQ8bYdC8r4Smg",oauth_signature_method="HMAC-SHA1",oauth_timestamp="1424744457",oauth_nonce="761193913",oauth_version="1.0",oauth_token="3057842603-X3h15gWyUzrgBAPWKjRLd5HGSSLewwmj9GHXQex",oauth_signature="Q7Wx%2F6vgYf0x4k2z4AlpbhkA6Jw%3D"',
