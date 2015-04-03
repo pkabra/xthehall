@@ -98,12 +98,23 @@ function init() {
   $scope.hospital_list = JSON.parse('["Sinai-Grace Hospital", "Henry Ford Hospital", "Beaumont Hospital", "Oakwood Heritage Hospital"]');
   $scope.save_click = false;
 
+  
+  console.log("0");
 
   try {
     $scope.nickname = ProfileService.getNickname();
+    console.log("1");
     $scope.nickname_width = $scope.onWrite($scope.nickname);
-    $scope.interest_list = JSON.parse(ProfileService.getInterest());
+    console.log("2");
+
+
+
+    $scope.interest_list = ProfileService.getInterest();
+    console.log("3");
+    
+    
     $scope.hospital_select = ProfileService.getHospital_info();
+    console.log("4");
     image.src = ProfileService.getImage();
     console.log("Successfully pulled values.");
 
