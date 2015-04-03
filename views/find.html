@@ -1,0 +1,197 @@
+<style>
+
+    .thumbnail {
+    margin:30px;
+
+
+}
+
+.box    {  width:150px;
+           height:150px;
+          border-bottom:2px solid #fff;
+          border-right:2px solid #fff;
+          margin-left:30px;
+          margin-right:30px;
+          margin-top:0px;
+          margin-bottom:0px;
+  background-size:cover;
+border-radius:5px;
+overflow:hidden;}
+
+.overlay    {  background:rgba(0,0,0,.75);
+               text-align:center;
+               padding:50px 10px 100px 10px;
+               opacity:0;
+               -webkit-transition: opacity .25s ease;
+-moz-transition: opacity .25s ease;
+-webkit-background-clip: text;
+vertical-align: middle; color: transparent;
+
+
+}
+
+.box:hover .overlay {
+               opacity:0.5;}
+
+.plus       {  font-family:Helvetica;
+               font-weight:900;
+               color:rgba(255,255,255,.85);
+               font-size:96px;}
+
+
+.interestMatch {
+
+}
+
+.hospitalMatch {
+
+}
+
+.releaseMatch {
+
+}
+
+
+</style>
+
+
+<nav class="navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <span class="navbar-brand">XtheHall</span>
+        </div>
+    </div>
+</nav>
+
+<!-- #FAEBCC -->
+
+<div class="container">
+  <h1>Find Friends</h1>
+
+  <hr>
+
+  <div class="row">
+  <div class="col-md-3"/>
+  <div class="col-md-6">
+
+  <input class="form-control" ng-change="onType()" ng-click="clickQuery()" ng-model="queryString" style="text-align:center;"/>
+
+  <br>
+  <button ng-click="hospitalToggle()" class="btn btn-default text-center"> {{hospitalButtonText}} </button>
+  <br>
+  </div>
+  </div>
+
+  <br>
+  <p> <span style="background-color: #D6E9C6; color: #3C763D;"> &nbsp Special Match &nbsp </span>   <span style="background-color: #BCE8F1; color: #34495E;"> &nbsp Nearby Patient &nbsp </span> </p>
+
+
+  <div class="row">
+
+
+   <div ng-repeat="profile in visibleProfiles" class="col-xs-2" style="position: relative; height:225px; width:210px; white-space: pre-wrap; ">
+    
+
+
+    <div class=" box thumbnail text-center" style="position: absolute; top: 10px; left:27px; background:url({{profile.attributes.image._url}}); background-size: 150px 150px; border-color: #D6E9C6; border-width: 4px; width: 150px;     margin: 0 auto; ">
+
+    <div class="overlay"> Connect </div>
+
+
+  </div>
+
+  <div  style="width: 174px; height: 40px; position: absolute; top: 135px;"> <div class="text-center" style="margin-left:5px; margin-right:5px; overflow-x:auto; white-space: nowrap;"> {{profile.attributes.nickname}} </div>   </div>
+
+    </div>
+
+
+
+  </div>
+
+  
+  <hr>
+    <h2 class="text-center"><a href="#">Blah</a></h2>
+  <hr>
+
+
+  <div  class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Thank You! </strong> Your information has been saved.
+  </div>
+
+
+    <div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Thank You! </strong> Your information has been saved.
+  </div>
+
+
+
+    <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <strong>Thank You! </strong> Your information has been saved.
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+<div class="modal fade" id="infoDialogue">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Initialize Chat</h4>
+            </div>
+            <div class="modal-body">
+                <p>Start typing in who you'd like to start chatting with</p>
+                <select id="chatUserSelect" class="form-control multiselect multiselect-primary" multiple="multiple">
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" ng-click="createNewChatRoom()">Chat!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+<div class="col-md-2"/>
+<div class="col-md-8">
+
+
+
+</div>
+</div>
+
+<br><br><br>
+
