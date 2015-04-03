@@ -36,7 +36,7 @@ app.factory('MatchService', function($q, ProfileService) {
 
       query.find({
         success: function(users) {
-          defer.resolve(users);
+          deferred.resolve(users);
         },
         error: function(error) {
           console.log("Error: " + error.code + " " + error.message);

@@ -23,7 +23,7 @@ angular.module('XtheHall')
     var t = new Date();
     var m = {
       incoming: $scope.user.id != message.senderId,
-      user: message.senderId,
+      user: $scope.room.users[message.senderId].attributes.nickname || message.senderId,
       time: t.toLocaleDateString() + " " + t.toLocaleTimeString(),
       text: message.textBody.text
     };
