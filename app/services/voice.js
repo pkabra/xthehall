@@ -1,4 +1,4 @@
-app.factory('VoiceService', function($q, $rootScope, $location, ProfileService) {
+app.factory('VoiceService', function() {
 
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
