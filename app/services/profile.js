@@ -104,7 +104,6 @@ app.factory('ProfileService', function($q) {
         return;
       }
       profile.setInterest(interestList);
-      profile.save();
     },
 
     addInterest : function(interest) {
@@ -113,7 +112,6 @@ app.factory('ProfileService', function($q) {
         profile.setInterest(interestList);
       }
       profile.addUnique('interest', interest);
-      profile.save();
     },
 
     removeInterest : function(interest) {
@@ -121,27 +119,37 @@ app.factory('ProfileService', function($q) {
         return;
       }
       profile.remove('interest', interest);
-      profile.save();
     },
 
     setAvatar : function(avatar) {
       profile.setAvatar(avatar);
-      profile.save();
     },
 
     setNickname : function(nickname) {
       profile.setNickname(nickname);
-      profile.save();
     },
 
     setHospital_info : function(hospital_info) {
       profile.setHospital_info(hospital_info);
-      profile.save();
     },
 
     setReleaseDate : function(date) {
       profile.setReleaseDate(date);
-      profile.save();
+    },
+
+    saveProfile : function() {
+      var deferred = $q.defer();
+      profile.save(null, {
+        success: function(gameScore) {
+          deferred.resolve();
+        },
+        error: function(gameScore, error) {
+          console.log('Failed to save profile with error ' + error)
+          deferred.reject();
+        }
+      });
+
+      return deferred.promise;
     },
 
     updateLocation : function() {
