@@ -10,6 +10,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
           ProfileService.init(response.id).then(function(obj) {
             if (!angular.isUndefined(d)) {
               $rootScope.user = obj;
+              InstantMessageService.loginSinch(obj.id);
               d.resolve();
             }
           });
@@ -21,6 +22,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
         if (!angular.isUndefined(d)) {
           $rootScope.user = obj;
           $rootScope.user.type = "Parse";
+          InstantMessageService.loginSinch(obj.id);
           d.resolve();
         }
       });

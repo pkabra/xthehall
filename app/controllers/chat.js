@@ -1,9 +1,5 @@
 angular.module('XtheHall')
 .controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService, AuthService, VoiceService) {
-  InstantMessageService.loginSinch($scope.user.id);
-  console.log($scope.user.id);
-  console.log($scope.user);
-  
   var recipients = _.keys($scope.room.users);
 
   $scope.messages = [];
