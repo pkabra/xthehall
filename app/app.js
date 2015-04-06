@@ -14,7 +14,8 @@ var app = angular.module('XtheHall', [
   'ngRoute',
   'parse-angular',
   'parse-angular.enhance',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngTagsInput'
 ]).config(function ( $routeProvider ) {
   $routeProvider
     .when('/home', {

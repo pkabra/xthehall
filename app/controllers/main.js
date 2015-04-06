@@ -39,8 +39,8 @@ angular.module('XtheHall')
         };
 
         $scope.createNewChatRoom = function () {
+
             var users = $('#chatUserSelect').val();
-            users.push($scope.user.id);
             var success = function (room) {
                 $location.path("/chat/" + room.id);
             };
