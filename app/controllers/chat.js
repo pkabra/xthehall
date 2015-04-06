@@ -1,5 +1,5 @@
 angular.module('XtheHall')
-.controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService, AuthService) {
+.controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService, AuthService, VoiceService) {
   var recipients = _.keys($scope.room.users);
 
   $scope.messages = [];
@@ -51,5 +51,20 @@ angular.module('XtheHall')
 
   $scope.logout = function() {
       AuthService.logout();
+  }
+
+  VoiceService.setCommands({
+    write: function (commands) {
+      console.log(_.rest(commands).join(" "));
+      $('input#message').val($('input#message').val() + _.rest(commands).join(" "));
+      $scope.$apply();
+    },
+    send: function (commands) {
+      $scope.sendMessage();
+    }
+  });
+
+  if (ProfileService.getVoice_control()) {
+      VoiceService.start();
   }
 });

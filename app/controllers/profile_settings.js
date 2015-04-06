@@ -21,10 +21,6 @@ angular.module('XtheHall')
 
     var fileUrl = window.URL.createObjectURL(fileInput.files[0]);
     image.src = fileUrl;
-    console.log(JSON.stringify(typeof(fileInput)));
-    console.log(fileUrl);
-    console.log(JSON.stringify(fileInput.files[0]));
-
 
     var fullPath = document.getElementById('image-input').value;
 
@@ -41,23 +37,15 @@ angular.module('XtheHall')
   };
 
   $scope.hospital_list = ["Sinai-Grace Hospital", "Henry Ford Hospital", "Beaumont Hospital", "Oakwood Heritage Hospital"];
-        $scope.newPassword = $scope.newPasswordConfirmation = String();
-        $scope.formError = false;
-        $scope.formErrorMessage = String();
-        $scope.formSave = false;
-  try {
-    $scope.nickname = ProfileService.getNickname();
-      $('#interestSelect').val(ProfileService.getInterest());
-    $scope.hospital_select = ProfileService.getHospital_info();
-    image.src = ProfileService.getImage();
-      $('#voice-control-toggle').bootstrapSwitch('state', false); //TODO LINK WITH PARSE HERE
-    console.log("Successfully pulled values.");
-  }
-  catch(err) {
-    $scope.nickname = "";
-
-    console.log("Couldn't pull values, populating with default.");
-  }
+  $scope.newPassword = $scope.newPasswordConfirmation = String();
+  $scope.formError = false;
+  $scope.formErrorMessage = String();
+  $scope.formSave = false;
+  $scope.nickname = ProfileService.getNickname();
+  $('#interestSelect').val(ProfileService.getInterest());
+  $scope.hospital_select = ProfileService.getHospital_info();
+  image.src = ProfileService.getImage();
+  $('#voice-control-toggle').bootstrapSwitch('state', true && ProfileService.getVoice_control()); //TODO LINK WITH PARSE HERE
 
 $scope.formSubmit = function() {
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
@@ -67,7 +55,7 @@ $scope.formSubmit = function() {
     var voiceControl = $('#voice-control-toggle').bootstrapSwitch("state");
     var interests = $('#interestSelect').val();
 
-    if($scope.newPassword !== $scope.newPasswordConfirmation) {
+    if(_.isEmpty($scope.newPassword) || $scope.newPassword !== $scope.newPasswordConfirmation) {
         $scope.formError = true;
         $scope.formErrorMessage = "New password does not match its confirmation.";
         return;
@@ -78,8 +66,9 @@ $scope.formSubmit = function() {
     ProfileService.setHospital_info($scope.hospital_select);
     ProfileService.setImage(fileInput.files);
 
-    //TODO ProfileService.setPassword($scope.newPassword);
-    //TODO ProfileService.setVoiceControlPreference(voiceControl);
+    ProfileService.setPassword($scope.newPassword);
+    ProfileService.setVoiceControl(voiceControl);
+    
     var promise = ProfileService.saveProfile();
     promise.then(function() {
         $scope.formSave = true;

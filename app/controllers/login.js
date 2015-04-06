@@ -7,7 +7,7 @@ angular.module('XtheHall')
   $scope.loginfb = function () {
     FB.login(function (response) {
       if (response.status == 'connected') {
-        window.location.href="#/main";
+        window.location.href="#/home";
       }
     });
   }

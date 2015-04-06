@@ -1,8 +1,8 @@
-app.factory('ProfileService', function($q) {
+app.factory('ProfileService', function($q, $rootScope) {
   // Profile Data
   var Profile = Parse.Object.extend({
     className: 'Profile',
-    attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info', 'location', 'release_date']
+    attrs: ['fbid', 'image', 'interest', 'avatar', 'nickname', 'hospital_info', 'location', 'release_date', 'voice_control']
   });
 
   // singleton
@@ -18,7 +18,6 @@ app.factory('ProfileService', function($q) {
       var deferred = $q.defer();
       var query = new Parse.Query('Profile');
       query.equalTo('fbid', id.toString());
-      console.log('here here');
       query.find().then(
         function(result) {
           if (result.length == 0) {
@@ -26,18 +25,18 @@ app.factory('ProfileService', function($q) {
             profile.setFbid(id.toString());
             profile.setNickname('XtheHallUser');
             profile.save(null).then(
-              function(profile) {
+              function(resp) {
                 console.log('Successfully update location');
-                deferred.resolve();
+                deferred.resolve(profile);
               },
-              function(profile, error) {
+              function(resp, error) {
                 console.log('Failed to update lcoation with error ' + error);
-                deferred.resolve();
+                deferred.resolve(profile);
               });
               window.location.href="#/profile_settings";
           } else {
             profile = result[0];
-            deferred.resolve();
+            deferred.resolve(profile);
           }
         },
         function(error) {
@@ -53,7 +52,11 @@ app.factory('ProfileService', function($q) {
 
     // return a URL to the image due to cross domain secucity issue
     getImage : function() {
-      return profile.getImage().url();
+      var image = profile.getImage();
+      if (image) {
+        return image.url();
+      }
+      return "";
     },
 
     getInterest : function() {
@@ -78,6 +81,10 @@ app.factory('ProfileService', function($q) {
 
     getLocation: function() {
       return profile.getLocation();
+    },
+
+    getVoice_control: function() {
+      return profile.getVoice_control();
     },
 
     setImage : function(files) {
@@ -137,6 +144,17 @@ app.factory('ProfileService', function($q) {
 
     setReleaseDate : function(date) {
       profile.setReleaseDate(date);
+    },
+
+    setVoiceControl: function(voice) {
+      profile.setVoice_control(voice);
+    },
+
+    setPassword: function(newPass) {
+      if ($rootScope.user.type == "Parse") {
+        $rootScope.user.setPassword(newPass);
+        $rootScope.user.save();
+      }
     },
 
     saveProfile : function() {

@@ -7,29 +7,28 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
     if (isFb) {
       FB.api('/me', function(response) {
         $rootScope.$apply(function() {
-          $rootScope.user = response;
-
           InstantMessageService.loginSinch(response.id);
-          console.log("initializing profile service");
 
-          ProfileService.init(response.id).then(function() {
-            console.log("completed profile setup");
-            if (!angular.isUndefined(d))
+          ProfileService.init(response.id).then(function(obj) {
+            if (!angular.isUndefined(d)) {
+              $rootScope.user = obj;
               d.resolve();
+            }
           });
         });
       })
     } else {
       var currentUser = Parse.User.current();
       $rootScope.user = currentUser;
+      $rootScope.user.type = "Parse";
 
       InstantMessageService.loginSinch(currentUser.id);
-      console.log("initializing profile service");
 
-      ProfileService.init(currentUser.id).then(function() {
-        console.log("completed profile setup");
-        if (!angular.isUndefined(d))
+      ProfileService.init(currentUser.id).then(function(obj) {
+        if (!angular.isUndefined(d)) {
+          $rootScope.user = obj;
           d.resolve();
+        }
       });
     }
   };

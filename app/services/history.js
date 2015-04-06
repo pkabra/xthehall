@@ -55,7 +55,7 @@ var MessageHistory = Parse.Object.extend({
         };
         
         var userQuery = new Parse.Query('Profile');
-        userQuery.containedIn('fbid', results[0].attributes.users);
+        userQuery.containedIn('objectId', results[0].attributes.users);
         userQuery.find().then(function(results) {
           _.each(results, function (r) {
             $rootScope.room.users[r.attributes.fbid] = r;
