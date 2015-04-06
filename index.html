@@ -23,6 +23,36 @@
     <![endif]-->
   </head>
   <body>
+
+    <nav class="navbar-default  navbar-fixed-top" role="navigation" ng-hide="isLogin()">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/home">XtheHall</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="#/home">Home</a></li>
+                    <li><a href="#/find">Find Friends</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a><span id="voice-toggle" class="fui-mic nav-icon" style="font-size: 20px;"></span></a>
+                    </li>
+                    <li>
+                        <a id="accessibility-toggle" href=""><span class="fui-eye nav-icon"></span><span ng-show="accessibility" class="navbar-unread"></span></a>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown"><span class="fui-gear nav-icon"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/profile_settings">Profile Settings</a></li>
+                            <li><a href="#/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div ng-view></div>
 
     <!-- Vendor Libraries -->
@@ -53,8 +83,8 @@
 
     <script src="//www.parsecdn.com/js/parse-1.3.4.min.js"></script>
     <script src="js/parse-angular.js"></script>
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+    <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/hmac-sha256.js"></script>
+    <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.js"> </script>
 
@@ -67,7 +97,6 @@
     <!-- Now the app -->
     <script src="app/app.js"></script>
     <!-- Controllers -->
-    <script src="app/controllers/home.js"></script>
     <script src="app/controllers/chat.js"></script>
     <script src="app/controllers/find.js"></script>
     <script src="app/controllers/profile_settings.js"></script>
