@@ -55,7 +55,7 @@ $scope.formSubmit = function() {
     var voiceControl = $('#voice-control-toggle').bootstrapSwitch("state");
     var interests = $('#interestSelect').val();
 
-    if(_.isEmpty($scope.newPassword) || $scope.newPassword !== $scope.newPasswordConfirmation) {
+    if($scope.newPassword !== $scope.newPasswordConfirmation) {
         $scope.formError = true;
         $scope.formErrorMessage = "New password does not match its confirmation.";
         return;
@@ -66,7 +66,8 @@ $scope.formSubmit = function() {
     ProfileService.setHospital_info($scope.hospital_select);
     ProfileService.setImage(fileInput.files);
 
-    ProfileService.setPassword($scope.newPassword);
+    if (!_.isEmpty($scope.newPassword))
+      ProfileService.setPassword($scope.newPassword);
     ProfileService.setVoiceControl(voiceControl);
     
     var promise = ProfileService.saveProfile();

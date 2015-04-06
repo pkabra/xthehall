@@ -1,4 +1,4 @@
-app.factory('VoiceService', function($rootScope) {
+app.factory('VoiceService', function($rootScope, $location) {
 
   var microphoneIcon = $('#voice-toggle');
 
