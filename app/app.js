@@ -32,11 +32,7 @@ var app = angular.module('XtheHall', [
       controller: 'FindController',
       controllerAs: 'find',
       resolve: {
-        authenticate: function($q, AuthService) {
-          var deferred = $q.defer();
-          AuthService.watchStatusChange(deferred);
-          return deferred.promise;
-        }
+        authenticate: Authenticator
       }
     })
     .when('/chat', {
@@ -60,7 +56,7 @@ var app = angular.module('XtheHall', [
       templateUrl: 'views/login.html',
       controller: 'LoginController'
     })
-    .when('/main', {
+    .when('/home', {
       templateUrl: 'views/main.html',
       controller: 'MainController',
       controllerAs: 'main',
@@ -78,7 +74,11 @@ var app = angular.module('XtheHall', [
       console.log("login failed");
       $location.path("/login");
     }
-  })
+  });
+
+  $rootScope.isLogin = function () {
+    return $location.path() === "/login";
+  };
 
   // create a user variable which is accessable from root scope
   $rootScope.user = {};
