@@ -145,7 +145,7 @@ vertical-align: middle; color: transparent;
     
 
 
-    <div ng-click="blah(profile.attributes.nickname, profile.attributes.fbid);" ng-class="{interestMatch: isSimilarInterests(profile.attributes.simscore), notInterestMatch: !isSimilarInterests(profile.attributes.simscore), hospitalMatch: isSameHospital(profile.attributes.hospital_info)}" class=" box thumbnail text-center" style="position: absolute; top: 10px; left:27px; background:url({{profile.attributes.image._url}}); background-size: 150px 150px;  width: 150px;     margin: 0 auto; "  >
+    <div ng-click="blah(profile.attributes.nickname, profile.attributes.fbid);" ng-class="{interestMatch: isSimilarInterests(profile.attributes.simscore), notInterestMatch: !isSimilarInterests(profile.attributes.simscore), hospitalMatch: isSameHospital(profile.attributes.hospital_info)}" class=" box thumbnail text-center" style="position: absolute; top: 10px; left:27px; background:url({{profile.attributes.image._url}}); background-size: 150px 150px;  width: 150px;     margin: 0 auto; "  data-popover="" data-html=true data-content="{{profile.attributes.hover_text}}">
 
     <div class="overlay"> Connect </div>
 
