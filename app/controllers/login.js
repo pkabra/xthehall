@@ -14,7 +14,7 @@ angular.module('XtheHall')
 
   $scope.login = function(user) {
   	AuthService.login(user.account, user.password).then(function() {
-  		window.location.href="#/main";
+  		window.location.href="#/profile_settings";
   	}, function() {
   		$scope.error = 'Error: wrong password or username';
   		$scope.showError = true;

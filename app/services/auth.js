@@ -40,7 +40,6 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
     // TODO(dilu): Remove debug logging when code is well-tested.
     watchStatusChange : function(d) {
       var currentUser = Parse.User.current();
-
       // if the user logs in with xtheHall account
       if (currentUser) {
         init(d, false);
