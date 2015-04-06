@@ -81,7 +81,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
             deferred.resolve();
         },
         error: function(user, error) {
-          alert("Error: " + error.code + " " + error.message);
+          console.log("Error: " + error.code + " " + error.message);
           deferred.reject(error);
         }
       });
@@ -103,7 +103,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
           deferred.resolve();
         },
         error: function(user, error) {
-          alert("Error: " + error.code + " " + error.message);
+          console.log("Error: " + error.code + " " + error.message);
           deferred.reject(error);
         }
       });
