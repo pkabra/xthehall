@@ -2,7 +2,7 @@
  * Created by Adam on 2/19/15.
  */
 angular.module('XtheHall')
-    .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService, VoiceService) {
+    .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService, VoiceService, AuthService) {
         $scope.conversationPreviews = [];
         $scope.accessibility = false;
 
@@ -66,6 +66,10 @@ angular.module('XtheHall')
             };
             HistoryService.create_room(users, success);
         };
+
+        $scope.logout = function() {
+            AuthService.logout();
+        }
 
         VoiceService.setCommands({
             open: function (commands) {

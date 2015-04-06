@@ -17,7 +17,6 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
             if (!angular.isUndefined(d))
               d.resolve();
           });
-
         });
       })
     } else {
@@ -112,11 +111,17 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
 
     // Facebook log out
     logout : function() {
-      FB.logout(function(response) {
-        $rootScope.$apply(function() {
-          $rootScope.user = {};
-        });
-      })
+      var currentUser = Parse.User.current();
+      if (currentUser) {
+        Parse.User.logOut();
+        $rootScope.user = {};
+      } else {
+        FB.logout(function(response) {
+          $rootScope.$apply(function() {
+            $rootScope.user = {};
+          });
+        })
+      }
     }
   };
 })

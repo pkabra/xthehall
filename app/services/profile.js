@@ -18,11 +18,13 @@ app.factory('ProfileService', function($q) {
       var deferred = $q.defer();
       var query = new Parse.Query('Profile');
       query.equalTo('fbid', id.toString());
+      console.log('here here');
       query.find().then(
         function(result) {
           if (result.length == 0) {
             profile = new Parse.Object('Profile');
             profile.setFbid(id.toString());
+            profile.setNickname('XtheHallUser');
             profile.save(null).then(
               function(profile) {
                 console.log('Successfully update location');
@@ -32,11 +34,11 @@ app.factory('ProfileService', function($q) {
                 console.log('Failed to update lcoation with error ' + error);
                 deferred.resolve();
               });
+              window.location.href="#/profile_settings";
           } else {
             profile = result[0];
             deferred.resolve();
           }
-
         },
         function(error) {
           console.log('Failed to retrieve profile with id' + id.toString());
