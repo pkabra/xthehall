@@ -164,13 +164,40 @@ app.factory('ProfileService', function($q, $rootScope) {
           deferred.resolve();
         },
         error: function(gameScore, error) {
-          console.log('Failed to save profile with error ' + error)
+          console.log('Failed to save profile with error ' + error);
           deferred.reject();
         }
       });
 
       return deferred.promise;
     },
+
+      deleteProfile : function() {
+          console.log('in delete profile function...');
+          var deferred = $q.defer();
+          profile.destroy({
+              success: function() {
+                  console.log('successfully deleted profile...');
+                  if($rootScope.user.type != "Parse") {
+                      deferred.resolve();
+                      return;
+                  }
+                  $rootScope.user.destroy({
+                      success: function() {
+                          deferred.resolve();
+                      },
+                      error: function() {
+                          deferred.reject();
+                      }
+                  });
+              },
+              error: function () {
+                  deferred.reject();
+              }
+          });
+
+          return deferred.promise;
+      },
 
     updateLocation : function() {
       // update the profile
