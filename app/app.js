@@ -67,7 +67,7 @@ var app = angular.module('XtheHall', [
     .otherwise({
       redirectTo: '/login'
     });
-}).run(function($rootScope, $q, $window, $location, AuthService) {
+}).run(function($rootScope, $q, $window, $location, AuthService, $timeout) {
   $rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
     console.log(event, current, previous, rejection);
     if (rejection == "login_failed") {
@@ -90,8 +90,11 @@ var app = angular.module('XtheHall', [
       content: "<div id='voice-popover' style='display: inline-block; padding-right: 10px'>Try the voice control feature!</div><a ng-click='hidePopover()' class='glyphicon glyphicon-remove-circle' aria-hidden='true'></a><div>Say <span class='alert-danger' style='font-weight: bold; font-size: 18px'> Orange</span> to start!</div>"
   });
 
-  _dataTipPopoverTarget.popover('show');
-  //$('#voice-popover').parents(".popover-content").siblings(".arrow").hide();
+  function delayShow() {
+    _dataTipPopoverTarget.popover('show');
+  }
+
+  $timeout(delayShow, 1000);
 
   $rootScope.hidePopover = function() {
     _dataTipPopoverTarget.popover('hide');

@@ -33,14 +33,14 @@ angular.module('XtheHall')
             });
 
             profiles[i].attributes['simscore'] = temp_array.length;
-            profiles[i].attributes['hover_text'] = "<b> Hospital </b>  <br>" 
+            profiles[i].attributes['hover_text'] = "<b> Hospital </b>  <br>"
 
             if (typeof profiles[i].attributes['hospital_info'] === "undefined")
                 profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("N/A");
-            else 
+            else
                 profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat(profiles[i].attributes['hospital_info']);
 
-            profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("<br> <b> Interests </b> <br>");
+            profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("<br> <br> <b> Interests </b> <br>");
 
             if (typeof profiles[i].attributes['interest'] === "undefined")
                 profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("N/A<br>");
@@ -80,7 +80,7 @@ angular.module('XtheHall')
 
     $scope.onType = function() {
         $scope.visibleProfiles = [];
-        for (i = 0; i < $scope.profiles.length; i++) { 
+        for (i = 0; i < $scope.profiles.length; i++) {
             if ($scope.profiles[i].attributes.nickname.indexOf($scope.queryString) > -1)
             {
                 $scope.visibleProfiles.push($scope.profiles[i]);

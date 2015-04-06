@@ -25,8 +25,8 @@
             <div ng-click="addToChatList(profile.attributes.nickname, profile.id);" ng-class="applyProfileClasses(profile)" class="box thumbnail text-center user-image" style="background:url({{profile.attributes.image._url}}) no-repeat; background-size: 150px 150px;"  data-popover="" data-html=true data-content="{{profile.attributes.hover_text}}">
                 <div class="overlay">Connect</div>
             </div>
-            <div  style="width: 174px; height: 40px; position: absolute; top: 135px;">
-                <div class="text-center" style="margin-left:5px; margin-right:5px; overflow-x:auto; white-space: nowrap;">{{profile.attributes.nickname}}</div>
+            <div>
+                <div class="text-center" style="margin-top:15px; overflow-x:auto; white-space: nowrap;">{{profile.attributes.nickname}}</div>
             </div>
         </div>
     </div>
