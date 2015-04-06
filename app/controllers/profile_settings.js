@@ -17,6 +17,24 @@ angular.module('XtheHall')
   var fileInput = document.getElementById('image-input');
   var image = document.getElementById('image-container');
 
+  $scope.showDeleteUser = function() {
+      $('#deleteUserModal').modal('show');
+  };
+
+  $scope.deleteUser = function() {
+      console.log('in delete user function...');
+      var promise = ProfileService.deleteProfile();
+      promise.then(function() {
+          AuthService.logout();
+          window.location.href="#/login";
+      }, function() {
+          $('#deleteUserModal').modal('hide');
+          $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+          $scope.formError = true;
+          $scope.formErrorMessage = "Unsuccessful deletion of account. Please try again later.";
+      });
+  };
+
   $scope.image_upload = function(){
 
     var fileUrl = window.URL.createObjectURL(fileInput.files[0]);
