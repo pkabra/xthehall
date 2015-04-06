@@ -80,6 +80,25 @@ var app = angular.module('XtheHall', [
     return $location.path() === "/login";
   };
 
+  _dataTipPopoverTarget = $("#voice-toggle");
+  _dataTipPopoverTarget.popover({
+      title: "",
+      placement: 'bottom',
+      container: 'body',
+      trigger: 'focus',
+      html : true,
+      content: "<div id='voice-popover' style='display: inline-block; padding-right: 10px'>Try the voice control feature!</div><a ng-click='hidePopover()' class='glyphicon glyphicon-remove-circle' aria-hidden='true'></a><div>Say <span class='alert-danger' style='font-weight: bold; font-size: 18px'> Orange</span> to start!</div>"
+  });
+
+  _dataTipPopoverTarget.popover('show');
+  //$('#voice-popover').parents(".popover-content").siblings(".arrow").hide();
+
+  $rootScope.hidePopover = function() {
+    _dataTipPopoverTarget.popover('hide');
+  }
+
+
+
   // create a user variable which is accessable from root scope
   $rootScope.user = {};
 
