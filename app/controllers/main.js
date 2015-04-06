@@ -18,22 +18,15 @@ angular.module('XtheHall')
             _.each(rooms, function (r) {
                 HistoryService.retrieveHistory(r.id, 1).then(function (m) {
                     if (_.isEmpty(m)) return;
-                    $scope.conversationPreviews.push({
-                        id: r.id,
-                        timestamp: m[0].time.toLocaleDateString() + " " + m[0].time.toLocaleTimeString(),
-                        messagePreview: m[0].message,
-                        picUrl: "../images/SmallLogo1.png",
-                        friends: ['Emily', 'Hannah', 'Bradley', 'Stacey'],
-                        friendString: ''
-                    });
-                    $scope.conversationPreviews.forEach(function (conversation, conversationIndex, conversationArray) {
-                        var friendString = "";
-                        conversation.friends.forEach(function (friend, friendIndex, friendArray) {
-                            friendString += friend;
-                            if (friendIndex < friendArray.length - 1)
-                                friendString += ', ';
+                    (function(friends) {
+                        var nicknames = _.map(friends, function(f) { return f.attributes.nickname; }).join(", ");
+                        $scope.conversationPreviews.push({
+                            id: r.id,
+                            timestamp: m[0].time.toLocaleDateString() + " " + m[0].time.toLocaleTimeString(),
+                            messagePreview: m[0].message,
+                            picUrl: "../images/SmallLogo1.png",
+                            friends: nicknames,
                         });
-                        conversation.friendString = friendString;
                     });
                 });
             });

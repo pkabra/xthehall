@@ -1,5 +1,9 @@
 angular.module('XtheHall')
 .controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService, AuthService, VoiceService) {
+  InstantMessageService.loginSinch($scope.user.id);
+  console.log($scope.user.id);
+  console.log($scope.user);
+  
   var recipients = _.keys($scope.room.users);
 
   $scope.messages = [];
@@ -8,6 +12,8 @@ angular.module('XtheHall')
   .then(function(history) {
     _.each(history, function(h) {
       var u = $scope.room.users[h.sender];
+      console.log($scope.room.users);
+      console.log(h.sender);
       var m = {
         incoming: h.sender != $scope.user.id,
         user: u.attributes.nickname || u.attributes.fbid,
@@ -21,6 +27,7 @@ angular.module('XtheHall')
   var incomingmessageListener = function(message) {
     if (message.textBody.room != $scope.room.id) return;
     var t = new Date();
+    console.log(message);
     var m = {
       incoming: $scope.user.id != message.senderId,
       user: $scope.room.users[message.senderId].attributes.nickname || message.senderId,

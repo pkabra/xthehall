@@ -13,7 +13,7 @@
         <div class="col chats" ng-repeat="conversation in conversationPreviews | orderBy: '-timestamp'">
             <a href="#/chat/{{conversation.id}}" class="thumbnail col-xs-6 col-md-3">
                 <div class="message-title">
-                    <span class="text-center">{{conversation.friendString}}</span>
+                    <span class="text-center">{{conversation.friends}}</span>
                 </div>
                 <div class="message-preview">
                     <span>{{conversation.messagePreview}}</span>

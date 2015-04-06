@@ -126,7 +126,8 @@ angular.module('XtheHall')
         };
 
         var users = selectUsersObject.val();
-        users.push($scope.user.id)
+        users.push($scope.user.id);
+        console.log(users);
         HistoryService.create_room(users, success);
     };
 });

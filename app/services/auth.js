@@ -7,8 +7,6 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
     if (isFb) {
       FB.api('/me', function(response) {
         $rootScope.$apply(function() {
-          InstantMessageService.loginSinch(response.id);
-
           ProfileService.init(response.id).then(function(obj) {
             if (!angular.isUndefined(d)) {
               $rootScope.user = obj;
@@ -19,14 +17,10 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
       })
     } else {
       var currentUser = Parse.User.current();
-      $rootScope.user = currentUser;
-      $rootScope.user.type = "Parse";
-
-      InstantMessageService.loginSinch(currentUser.id);
-
       ProfileService.init(currentUser.id).then(function(obj) {
         if (!angular.isUndefined(d)) {
           $rootScope.user = obj;
+          $rootScope.user.type = "Parse";
           d.resolve();
         }
       });
