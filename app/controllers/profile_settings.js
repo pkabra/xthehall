@@ -14,10 +14,6 @@ angular.module('XtheHall')
   };
 })
 .controller('ProfileSettingsController', function($scope, ProfileService, AuthService) {
-  $('#interestSelect').select2();
-  $('#voice-control-toggle').bootstrapSwitch();
-
-
   var fileInput = document.getElementById('image-input');
   var image = document.getElementById('image-container');
 
@@ -96,8 +92,9 @@ $scope.formSubmit = function() {
 
 $scope.logout = function() {
     AuthService.logout();
-}
+};
 
 $('#hospital_select').val("Beaumont Hospital");
-
+$('#interestSelect').select2();
+$('#voice-control-toggle').bootstrapSwitch();
 });
