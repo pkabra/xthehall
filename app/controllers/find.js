@@ -1,5 +1,5 @@
 angular.module('XtheHall')
-.controller('FindController', function($scope, MatchService, ProfileService) {
+.controller('FindController', function($scope, $location, MatchService, ProfileService, HistoryService) {
 
     // console.log(MatchService);
 
@@ -14,6 +14,8 @@ angular.module('XtheHall')
       recognition.start();
 
 
+      $scope.tags = [];
+      $scope.name_to_fbid = {};
 
     $scope.queryString = "";
     $scope.hospitalButtonText = "Show Only Patients from Same Hospital";
@@ -103,7 +105,29 @@ angular.module('XtheHall')
         $('#infoDialog').modal('show');
     };
 
-    // console.log();
+    $scope.blah = function(name, fbid) {
+        console.log(name);
+        console.log("BLAH");
 
+        $scope.tags.push({"text" : name});
+        $scope.name_to_fbid[name] = fbid; 
+
+    };
+
+    $scope.createNewChatRoom = function () {
+
+        var success = function (room) {
+            $location.path("/chat/" + room.id);
+        };
+
+        var user_fbids = [];
+
+        for (i = 0; i < $scope.tags.length; i++)
+        {
+            user_fbids.push($scope.name_to_fbid[$scope.tags[i]["text"]]);
+        }
+
+        HistoryService.create_room($scope.user_fbids, success);
+    };
  
 });

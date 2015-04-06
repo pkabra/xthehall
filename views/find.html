@@ -1,4 +1,6 @@
+
 <style>
+
 
     .thumbnail {
     margin:30px;
@@ -41,10 +43,15 @@ vertical-align: middle; color: transparent;
 
 .interestMatch {
 
+  border-color: #D6E9C6; 
+  border-width: 4px;
+
 }
 
 .hospitalMatch {
-
+    outline: solid; 
+    outline-color: #BCE8F1; 
+    outline-width: 4px;
 }
 
 .releaseMatch {
@@ -71,29 +78,39 @@ vertical-align: middle; color: transparent;
   <hr>
 
   <div class="row">
-  <div class="col-md-3"/>
-  <div class="col-md-6">
+  <div class="col-md-1"/>
+  <div class="col-md-10 text-center">
 
-  <input class="form-control" ng-change="onType()" ng-click="clickQuery()" ng-model="queryString" style="text-align:center;"/>
+  <!-- <input class="form-control" ng-change="onType()" ng-click="clickQuery()" ng-model="queryString" style="text-align:center;"/> -->
 
   <br>
-  <button ng-click="hospitalToggle()" class="btn btn-default text-center"> {{hospitalButtonText}} </button>
+
+<tags-input ng-model="tags"  ></tags-input>
+
+<br>
+
+<button ng-click="createNewChatRoom()" class="btn btn-primary"> Create Room </button>
+
+
+  <!-- <button ng-click="hospitalToggle()" class="btn btn-default text-center"> {{hospitalButtonText}} </button> -->
   <br>
   </div>
   </div>
 
   <br>
-  <p> <span style="background-color: #D6E9C6; color: #3C763D;"> &nbsp Special Match &nbsp </span>   <span style="background-color: #BCE8F1; color: #34495E;"> &nbsp Nearby Patient &nbsp </span> </p>
+  <p> <span style="background-color: #D6E9C6; color: #3C763D;"> &nbsp Special Match &nbsp </span>   <span style="background-color: #BCE8F1; color: #34495E;"> &nbsp Same Hospital &nbsp </span> </p>
+
+
 
 
   <div class="row">
 
 
-   <div ng-repeat="profile in visibleProfiles" class="col-xs-2" style="position: relative; height:225px; width:210px; white-space: pre-wrap; ">
+   <div ng-repeat="profile in visibleProfiles" class="col-xs-2 " style="position: relative; height:225px; width:210px; white-space: pre-wrap; ">
     
 
 
-    <div class=" box thumbnail text-center" style="position: absolute; top: 10px; left:27px; background:url({{profile.attributes.image._url}}); background-size: 150px 150px; border-color: #D6E9C6; border-width: 4px; width: 150px;     margin: 0 auto; ">
+    <div ng-click="blah(profile.attributes.nickname, profile.attributes.fbid)" class=" box thumbnail text-center hospitalMatch interestMatch" style="position: absolute; top: 10px; left:27px; background:url({{profile.attributes.image._url}}); background-size: 150px 150px;  width: 150px;     margin: 0 auto; ">
 
     <div class="overlay"> Connect </div>
 
@@ -194,4 +211,14 @@ vertical-align: middle; color: transparent;
 </div>
 
 <br><br><br>
+
+
+
+
+{{tags}}
+
+<button ng-click="blah()"> Test Button </button>
+
+
+<br><br>
 
