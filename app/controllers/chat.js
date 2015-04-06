@@ -1,5 +1,5 @@
 angular.module('XtheHall')
-.controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService) {
+.controller('ChatController', function($scope, $location, AuthService, InstantMessageService, ProfileService, HistoryService, AuthService) {
   var recipients = _.keys($scope.room.users);
 
   $scope.messages = [];
@@ -48,4 +48,8 @@ angular.module('XtheHall')
     InstantMessageService.sendMessage(recipients, {room: $scope.room.id, text: text});
     HistoryService.save($scope.room.id, $scope.user.id, text);
   };
+
+  $scope.logout = function() {
+      AuthService.logout();
+  }
 });
