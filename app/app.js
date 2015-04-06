@@ -19,25 +19,12 @@ var app = angular.module('XtheHall', [
   'ngTagsInput'
 ]).config(function ( $routeProvider ) {
   $routeProvider
-    .when('/home', {
-      templateUrl: 'views/home.html',
-      controller: 'HomeController',
-      controllerAs: 'home'
-    })
     .when('/profile_settings', {
       templateUrl: 'views/profile_settings.html',
       controller: 'ProfileSettingsController',
       controllerAs: 'profile_settings',
       resolve: {
         authenticate: Authenticator
-      }
-    })
-    .when('/find', {
-      templateUrl: 'views/find.html',
-      controller: 'FindController',
-      controllerAs: 'find',
-      resolve: {
-
       }
     })
     .when('/find', {
@@ -82,7 +69,7 @@ var app = angular.module('XtheHall', [
       }
     })
     .otherwise({
-      redirectTo: '/home'
+      redirectTo: '/login'
     });
 }).run(function($rootScope, $q, $window, $location, AuthService) {
   $rootScope.$on('$routeChangeError', function(event, current, previous, rejection){
