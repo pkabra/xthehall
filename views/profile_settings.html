@@ -1,250 +1,321 @@
-
-
-<head>
-
-  <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />
-  <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
-
-  <style>
-
-  .autocomplete{
-    width: 100%;
-    position: relative;
-  }
-
-  .autocomplete input{
-    font-size: 1.2em;
-    width: 100%;
-    padding:0.4em;
-  }
-
-  .autocomplete ul{
-    position: absolute;
-    left: 0;
-    width: 100%;
-    border-left: 1px solid #888;
-    border-right: 1px solid #888;
-    border-bottom: 1px solid #888;
-    z-index: 1;
-  }
-
-  .autocomplete li{
-    text-align: left;
-    list-style:none;
-    width: 100%;
-    padding:0.4em;
-    background-color: #fff;
-  }
-
-  .autocomplete li.active{
-    width: 100%;
-    background-color: #4bf;
-  }
-
-  .autocomplete .highlight {
-    background-color: #E2E2E2;
-  }
-
-  .autocomplete li.active .highlight {
-    background: #666;
-    color: #fff;
-  }
-
-    .btn-file {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-file input[type=file] {
-      position: absolute;
-      top: 0;
-      right: 0;
-      min-width: 100%;
-      min-height: 100%;
-      font-size: 100px;
-      text-align: right;
-      filter: alpha(opacity=0);
-      opacity: 0;
-      background: red;
-      cursor: inherit;
-      display: block;
-    }
-
-    .DocumentOuter
-{
-  overflow-x:hidden;
-}
-.DocumentList
-{
-    overflow-x:auto;
-    overflow-y:visible;
-    
-    
-
-    width:100%;
-}
-.DocumentItem
-{
-    
-    margin:3px;
-    
-}
-
-
-  </style>
-
-
-</head>
-
-
-
-
-
-
-
-<nav class="navbar-default" role="navigation">
+<nav class="navbar-default  navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <span class="navbar-brand">XtheHall</span>
+            <a class="navbar-brand" href="#/main">XtheHall</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a id="accessibility-toggle" href=""><span class="fui-eye nav-icon"></span><span ng-show="accessibility" class="navbar-unread"></span></a>
+                </li>
+                <li class="dropdown" dropdown>
+                    <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown"><span class="fui-gear nav-icon"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/profile_settings">Profile Settings</a></li>
+                        <li><a href="#/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
-
-<br>
-
-<div   class="form-inline text-center" style="font-size:20px;" > 
-
-
-
-<div class="row">
-
-
-<div class="col-md-6">
-
-  <p class="text-center"> Avatar </p>
-
-
-  <hr>
-
-
-  <div ng-show="!is_file_yes" class="input-group">
-    <span class="input-group-btn">
-      <span class="btn btn-default btn-file">
-        Choose File&hellip; <input type="file" accept="image/*" id="image-input" file-model="myFile" ng-model="fileUpload" onchange="angular.element(this).scope().image_upload();"  type="file" multiple>
-      </span>
-    </span>
-    <input type="text" class="form-control text-center" ng-model="avatar_img_name" readonly> 
-  </div>
-
-
-
-  <br><br>
-
-  <div>
-    <img id="image-container" style="width:200px;height:200px"/>
-  </div>
-
-  <br><br>
-
-
-
+<div class="container">
+    <h4 class="page-header">Settings</h4>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Nickname</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" placeholder="Nickname" ng-model="nickname" ng-click="click_nickname();" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">New Password</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="password" placeholder="Password" name="password" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Confirm Password</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="password" placeholder="Confirm Password" name="password-confirm" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Avatar</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                          <span class="btn btn-default btn-file">
+                            Choose File&hellip;<input type="file" accept="image/*" id="image-input" file-model="myFile" ng-model="fileUpload" onchange="angular.element(this).scope().image_upload();">
+                          </span>
+                    </span>
+                    <input type="text" class="form-control text-center" ng-model="avatar_img_name" readonly />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <img id="image-container" style="width:200px;height:200px"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Hospital</label>
+            <div class="col-sm-10">
+                <select id="hospital_select" ng-model="hospital_select" ng-options="hospital for hospital in hospital_list" class="select-picker form-control"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Interests</label>
+            <div class="col-sm-10">
+                <select id="interestSelect" class="form-control multiselect multiselect-primary" multiple="multiple">
+                    <option value="Celebrities">Celebrities</option>
+                    <option value="Cooking">Cooking</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Movies">Movies</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Technology">Technology</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input ng-click="save()" type="submit" class="btn btn-primary" value="Update" name="submit-type"/>
+            </div>
+        </div>
+    </form>
 </div>
 
+<!--<head>-->
 
-<div class="col-md-6">
+  <!--&lt;!&ndash;<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />&ndash;&gt;-->
+  <!--&lt;!&ndash;<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>&ndash;&gt;-->
+
+  <!--<style>-->
+
+  <!--.autocomplete{-->
+    <!--width: 100%;-->
+    <!--position: relative;-->
+  <!--}-->
+
+  <!--.autocomplete input{-->
+    <!--font-size: 1.2em;-->
+    <!--width: 100%;-->
+    <!--padding:0.4em;-->
+  <!--}-->
+
+  <!--.autocomplete ul{-->
+    <!--position: absolute;-->
+    <!--left: 0;-->
+    <!--width: 100%;-->
+    <!--border-left: 1px solid #888;-->
+    <!--border-right: 1px solid #888;-->
+    <!--border-bottom: 1px solid #888;-->
+    <!--z-index: 1;-->
+  <!--}-->
+
+  <!--.autocomplete li{-->
+    <!--text-align: left;-->
+    <!--list-style:none;-->
+    <!--width: 100%;-->
+    <!--padding:0.4em;-->
+    <!--background-color: #fff;-->
+  <!--}-->
+
+  <!--.autocomplete li.active{-->
+    <!--width: 100%;-->
+    <!--background-color: #4bf;-->
+  <!--}-->
+
+  <!--.autocomplete .highlight {-->
+    <!--background-color: #E2E2E2;-->
+  <!--}-->
+
+  <!--.autocomplete li.active .highlight {-->
+    <!--background: #666;-->
+    <!--color: #fff;-->
+  <!--}-->
+
+    <!--.btn-file {-->
+      <!--position: relative;-->
+      <!--overflow: hidden;-->
+    <!--}-->
+    <!--.btn-file input[type=file] {-->
+      <!--position: absolute;-->
+      <!--top: 0;-->
+      <!--right: 0;-->
+      <!--min-width: 100%;-->
+      <!--min-height: 100%;-->
+      <!--font-size: 100px;-->
+      <!--text-align: right;-->
+      <!--filter: alpha(opacity=0);-->
+      <!--opacity: 0;-->
+      <!--background: red;-->
+      <!--cursor: inherit;-->
+      <!--display: block;-->
+    <!--}-->
+
+    <!--.DocumentOuter-->
+<!--{-->
+  <!--overflow-x:hidden;-->
+<!--}-->
+<!--.DocumentList-->
+<!--{-->
+    <!--overflow-x:auto;-->
+    <!--overflow-y:visible;-->
+    <!---->
+    <!---->
+
+    <!--width:100%;-->
+<!--}-->
+<!--.DocumentItem-->
+<!--{-->
+    <!---->
+    <!--margin:3px;-->
+    <!---->
+<!--}-->
+
+
+  <!--</style>-->
+
+
+<!--</head>-->
+
+
+<!--<div   class="form-inline text-center" style="font-size:20px;" > -->
 
 
 
-  <p class="text-center"> Nickname </p>
-
-  <hr>
-
-  <input ng-model="nickname" ng-click="click_nickname();" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>
-
-  <br><br><br>
-
-  <p class="text-center"> Hospital </p>
-
-  <hr>
-
-<!-- 
-<select ng-model="hospital_select" class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">
-
-  <option ng-repeat="hospital in hospital_list"  value="{{hospital}}"> {{hospital}} </option>
-
-</select> -->
+<!--<div class="row">-->
 
 
-<select ng-model="hospital_select" ng-options="hospital for hospital in hospital_list" class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">
+<!--<div class="col-md-6">-->
 
-</select>
+  <!--<p class="text-center"> Avatar </p>-->
+
+
+  <!--<hr>-->
+
+
+  <!--<div ng-show="!is_file_yes" class="input-group">-->
+    <!--<span class="input-group-btn">-->
+      <!--<span class="btn btn-default btn-file">-->
+        <!--&lt;!&ndash;Choose File&hellip; <input type="file" accept="image/*" id="image-input" file-model="myFile" ng-model="fileUpload" onchange="angular.element(this).scope().image_upload();">&ndash;&gt;-->
+      <!--</span>-->
+    <!--</span>-->
+    <!--<input type="text" class="form-control text-center" ng-model="avatar_img_name" readonly />-->
+  <!--</div>-->
 
 
 
-</div>
+  <!--<br><br>-->
 
-</div>
+  <!--<div>-->
+    <!--&lt;!&ndash;<img id="image-container" style="width:200px;height:200px"/>&ndash;&gt;-->
+  <!--</div>-->
 
-
-
-
-
-
-
-<p class="text-center"> Interests </p>
-
-<hr>
-
-<em> Add interests using the last box. Delete existing interests by clicking on them. </em>
-
-<br>
-<br>
-
-<div class="row">
-
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-
-    <ul class="list-group">
-      <li ng-repeat="interest in interest_list" ng-click="click($index);" class="list-group-item"> {{interest}} </li>
-
-      <li class="list-group-item">  <input ng-model="new_interest" ng-enter="add_interest(new_interest, interest_list);" style="width: 400px; text-align: center; border-style:none;"> </input> </li>
-    </ul>
-    <!-- <input type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; [[num]]" value="[[ numStudents ]]" readonly> -->
-
-  </div>
+  <!--<br><br>-->
 
 
-</div>
+
+<!--</div>-->
 
 
-<p class="text-center">
- <br>
- <button ng-click="save(); save_click = true;" class="btn btn-success" style="height: 85px; width: 200px; font-size:40px;"> Submit </button>
-</p>
-<br>
+<!--<div class="col-md-6">-->
 
-<div class="row">
 
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
 
-  <div ng-show="save_click" class="alert alert-success alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <strong>Thank You! </strong> Your information has been saved.
-  </div>
+  <!--<p class="text-center"> Nickname </p>-->
 
-  </div>
+  <!--<hr>-->
 
-</div>
+  <!--<input ng-model="nickname" ng-click="click_nickname();" type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; {{nickname_width}}" ng-change="nickname_width = onWrite(nickname)"/>-->
 
-<br>
-<br>
+  <!--<br><br><br>-->
 
-{{movies}}
+  <!--<p class="text-center"> Hospital </p>-->
 
-blah
- <autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete>
- blah
+  <!--<hr>-->
 
-</div>
-<!-- </html> -->
+<!--&lt;!&ndash; -->
+<!--<select ng-model="hospital_select" class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">-->
+
+  <!--<option ng-repeat="hospital in hospital_list"  value="{{hospital}}"> {{hospital}} </option>-->
+
+<!--</select> &ndash;&gt;-->
+
+
+<!--<select ng-model="hospital_select" ng-options="hospital for hospital in hospital_list" class="form-control" id="hospital_select" style="height: 50px; font-size:25px;">-->
+
+<!--</select>-->
+
+
+
+<!--</div>-->
+
+<!--</div>-->
+
+
+
+
+
+
+
+<!--<p class="text-center"> Interests </p>-->
+
+<!--<hr>-->
+
+<!--<em> Add interests using the last box. Delete existing interests by clicking on them. </em>-->
+
+<!--<br>-->
+<!--<br>-->
+
+<!--<div class="row">-->
+
+  <!--<div class="col-md-4"></div>-->
+  <!--<div class="col-md-4">-->
+
+    <!--<ul class="list-group">-->
+      <!--<li ng-repeat="interest in interest_list" ng-click="click($index);" class="list-group-item"> {{interest}} </li>-->
+
+      <!--<li class="list-group-item">  <input ng-model="new_interest" ng-enter="add_interest(new_interest, interest_list);" style="width: 400px; text-align: center; border-style:none;"> </input> </li>-->
+    <!--</ul>-->
+     <!--<input type="text" class="form-control container-fluid inline text-center" style="height: 70px; font-size:40px; [[num]]" value="[[ numStudents ]]" readonly> -->
+
+  <!--</div>-->
+
+
+<!--</div>-->
+
+
+<!--<p class="text-center">-->
+ <!--<br>-->
+ <!--<button ng-click="save(); save_click = true;" class="btn btn-success" style="height: 85px; width: 200px; font-size:40px;"> Submit </button>-->
+<!--</p>-->
+<!--<br>-->
+
+<!--<div class="row">-->
+
+  <!--<div class="col-md-4"></div>-->
+  <!--<div class="col-md-4">-->
+
+  <!--<div ng-show="save_click" class="alert alert-success alert-dismissible" role="alert">-->
+    <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+    <!--<strong>Thank You! </strong> Your information has been saved.-->
+  <!--</div>-->
+
+  <!--</div>-->
+
+<!--</div>-->
+
+<!--<br>-->
+<!--<br>-->
+
+<!--{{movies}}-->
+
+<!--blah-->
+ <!--<autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete>-->
+ <!--blah-->
+
+<!--</div>-->
+<!--&lt;!&ndash; </html> &ndash;&gt;-->
