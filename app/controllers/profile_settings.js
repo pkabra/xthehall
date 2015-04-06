@@ -17,6 +17,10 @@ angular.module('XtheHall')
   var fileInput = document.getElementById('image-input');
   var image = document.getElementById('image-container');
 
+  $scope.showDeleteUser = function() {
+      $('#deleteUserModal').modal('show');
+  };
+
   $scope.image_upload = function(){
 
     var fileUrl = window.URL.createObjectURL(fileInput.files[0]);

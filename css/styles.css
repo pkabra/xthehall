@@ -221,6 +221,10 @@ ul#main-topic-list {
     display: block;
 }
 
+#showDeleteModalButton {
+    margin-left: 10px;
+}
+
 span.form-error {
     color: #c0392b;
 }
