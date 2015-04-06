@@ -14,16 +14,12 @@ angular.module('XtheHall')
   };
 })
 .controller('ProfileSettingsController', function($scope, ProfileService) {
+  $('#interestSelect').select2();
+  $('#voice-control-toggle').bootstrapSwitch();
+
 
   var fileInput = document.getElementById('image-input');
   var image = document.getElementById('image-container');
-
-
-  $scope.click_nickname = function(){
-    recognition.start();
-
-
-  };
 
   $scope.image_upload = function(){
 
@@ -34,7 +30,7 @@ angular.module('XtheHall')
     console.log(JSON.stringify(fileInput.files[0]));
 
 
-    fullPath = document.getElementById('image-input').value;
+    var fullPath = document.getElementById('image-input').value;
 
     if (fullPath) {
       var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
@@ -48,82 +44,56 @@ angular.module('XtheHall')
     $scope.$apply();
   };
 
-$scope.add_interest = function(item, interest_list)
-{
-  $scope.interest_list.push(item);
-  $scope.new_interest = "";
-};
-
-$scope.click = function(index)
-{
-  $scope.interest_list.splice(index,1);
-  console.log(index);
-};
-
-
-
-if (!('webkitSpeechRecognition' in window)) {
-  console.log("speech webkit not found");
-} else {
-  var recognition = new webkitSpeechRecognition();
-  recognition.continuous = false;
-  recognition.interimResults = false;
-
-  recognition.onstart = function() { };
-  recognition.onresult = function(event) {
-      $scope.nickname = event.results[event.results.length-1][0].transcript;
-      console.log($scope.nickname);
-      $scope.$apply();
-  };
-  recognition.onerror = function(event) { };
-  recognition.onend = function() { };
-
-}
-
-
-function init() {
-
-  console.log(ProfileService);
-
-  $scope.hospital_list = JSON.parse('["Sinai-Grace Hospital", "Henry Ford Hospital", "Beaumont Hospital", "Oakwood Heritage Hospital"]');
-  $scope.save_click = false;
-
-  
-  console.log("0");
-
+  $scope.hospital_list = ["Sinai-Grace Hospital", "Henry Ford Hospital", "Beaumont Hospital", "Oakwood Heritage Hospital"];
+        $scope.newPassword = $scope.newPasswordConfirmation = String();
+        $scope.formError = false;
+        $scope.formErrorMessage = String();
+        $scope.formSave = false;
   try {
     $scope.nickname = ProfileService.getNickname();
-    $scope.interest_list = ProfileService.getInterest();
+      $('#interestSelect').val(ProfileService.getInterest());
     $scope.hospital_select = ProfileService.getHospital_info();
     image.src = ProfileService.getImage();
+      $('#voice-control-toggle').bootstrapSwitch('state', false); //TODO LINK WITH PARSE HERE
     console.log("Successfully pulled values.");
   }
   catch(err) {
     $scope.nickname = "";
-    $scope.interest_list = [];
 
     console.log("Couldn't pull values, populating with default.");
   }
 
-  console.log("Done");
-}
+$scope.formSubmit = function() {
+    $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+    $scope.formError = false;
+    $scope.formSave = false;
 
-init();
+    var voiceControl = $('#voice-control-toggle').bootstrapSwitch("state");
+    var interests = $('#interestSelect').val();
 
-$scope.save = function() {
-  console.log("Save");
-  console.log($scope.nickname);
-  console.log(JSON.stringify($scope.interest_list));
-  console.log(JSON.stringify($scope.hospital_select));
-    debugger;
+    if($scope.newPassword !== $scope.newPasswordConfirmation) {
+        $scope.formError = true;
+        $scope.formErrorMessage = "New password does not match its confirmation.";
+        return;
+    }
 
-  ProfileService.setNickname($scope.nickname);
-  ProfileService.setInterest($scope.interest_list);
-  ProfileService.setHospital_info($scope.hospital_select);
-  ProfileService.setImage(fileInput.files);
+    ProfileService.setNickname($scope.nickname);
+    ProfileService.setInterest(interests);
+    ProfileService.setHospital_info($scope.hospital_select);
+    ProfileService.setImage(fileInput.files);
+
+    //TODO ProfileService.setPassword($scope.newPassword);
+    //TODO ProfileService.setVoiceControlPreference(voiceControl);
+    var promise = ProfileService.saveProfile();
+    promise.then(function() {
+        $scope.formSave = true;
+    }, function() {
+        $scope.formError = true;
+        $scope.formErrorMessage = "Unsuccessful save. Please try again.";
+    });
+
 };
-        $('#interestSelect').select2();
 
-document.getElementById('hospital_select').value = "Beaumont Hospital";
+$('#hospital_select').val("Beaumont Hospital");
 
 });

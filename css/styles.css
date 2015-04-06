@@ -220,3 +220,11 @@ ul#main-topic-list {
     cursor: inherit;
     display: block;
 }
+
+span.form-error {
+    color: #c0392b;
+}
+
+span.form-save {
+    color: #27ae60
+}
