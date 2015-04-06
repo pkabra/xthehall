@@ -1,40 +1,81 @@
 angular.module('XtheHall')
 .controller('FindController', function($scope, $location, MatchService, ProfileService, HistoryService) {
 
-    // console.log(MatchService);
-
-      var recognition = new webkitSpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onstart = function() {  };
-      recognition.onresult = function(event) { $scope.queryString = event.results[event.results.length-1][0].transcript;  $scope.onType(); $scope.$apply();};
-      recognition.onerror = function(event) {  };
-      recognition.onend = function() {  };
-      recognition.start();
+    $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 50}});
 
 
-      $scope.tags = [];
-      $scope.name_to_fbid = {};
+
+  $scope.testBool = true;
+  $scope.tags = [];
+  $scope.name_to_fbid = {};
 
     $scope.queryString = "";
     $scope.hospitalButtonText = "Show Only Patients from Same Hospital";
     $scope.sameHospitalProfiles = [];
 
+    var selectUsersObject = $('#chatUsers');
+
     MatchService.findUsersRandom(10).then(function(profiles)
         {
 
             $scope.user_hospital = ProfileService.getHospital_info();
+            $scope.user_interests = ProfileService.getInterest();
+            $scope.user_fbid = ProfileService.getId();
 
+            console.log("User interests");
+            console.log($scope.user_interests);
+
+
+
+
+            for (i = 0; i < profiles.length; ++i)
+            {
+                var temp_array = [];
+
+                temp_array = profiles[i].attributes.interest;
+                if(typeof temp_array === 'undefined'){
+                    temp_array = [];
+                };
+
+                temp_array = temp_array.filter(function(n) {
+                    return $scope.user_interests.indexOf(n) != -1
+                });
+
+                profiles[i].attributes['simscore'] = temp_array.length;
+
+
+
+                profiles[i].attributes['hover_text'] = "<b> Hospital </b>  <br>" 
+
+                if (typeof profiles[i].attributes['hospital_info'] === "undefined")
+                    profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("N/A");
+                else 
+                    profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat(profiles[i].attributes['hospital_info']);
+
+                profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("<br> <b> Interests </b> <br>");
+
+                if (typeof profiles[i].attributes['interest'] === "undefined")
+                    profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("N/A<br>");
+                else
+                {
+                    for (j = 0; j < profiles[i].attributes['interest'].length; ++j)
+                    {
+                        profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat(profiles[i].attributes['interest'][j]);
+                        profiles[i].attributes['hover_text'] = profiles[i].attributes['hover_text'].concat("<br>");
+                    }
+                }
+
+                
+            }
 
             console.log("Wait.");
-            console.log(profiles[0]);
+            console.log(profiles[1]);
             console.log("HAHA!");
-            console.log(profiles[0].attributes.image);
-            console.log(profiles[0].createdAt);
+            console.log(profiles[1].attributes.image);
+            console.log(profiles[1].createdAt);
             console.log(profiles[1].createdAt - profiles[0].createdAt);
-            console.log(typeof(profiles[0].createdAt));
-            console.log(profiles[0].attributes.nickname);
+            console.log(typeof(profiles[1].createdAt));
+            console.log(profiles[1].attributes.nickname);
 
             var date = new Date();
             console.log("Huh?");
@@ -44,7 +85,8 @@ angular.module('XtheHall')
 
             $scope.profiles = profiles;
             $scope.visibleProfiles = $scope.profiles;
-
+            $scope.$apply();
+            selectUsersObject.select2();
         });
 
       $scope.clickQuery = function(){
@@ -106,13 +148,22 @@ angular.module('XtheHall')
     };
 
     $scope.blah = function(name, fbid) {
-        console.log(name);
-        console.log("BLAH");
-
-        $scope.tags.push({"text" : name});
-        $scope.name_to_fbid[name] = fbid; 
-
+        var data = selectUsersObject.val();
+        if (data) {
+            data.push(fbid);
+            selectUsersObject.select2("val", data);
+        } else {
+            selectUsersObject.select2("val", [fbid]);
+        }
     };
+
+    $scope.isSameHospital = function(hospital) {
+        return (hospital == $scope.user_hospital);
+    }
+
+    $scope.isSimilarInterests = function(simscore) {
+        return ((simscore / $scope.user_interests.length) > 0.5);
+    }
 
     $scope.createNewChatRoom = function () {
 
