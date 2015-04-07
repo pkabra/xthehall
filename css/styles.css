@@ -280,23 +280,21 @@ vertical-align: middle; color: transparent;
 
 
 .interestMatch {
-
-  border-color: #D6E9C6; 
-  border-width: 4px;
-
+    color: #e67e22;
+    background-color: #f8dbc1;
 }
 
-.notInterestMatch {
-
-  border-color: #ECF0F1; 
-  border-width: 4px;
-
+a.interestMatch:hover, a.interestMatch:focus {
+    border-color: #e67e22;
 }
 
 .hospitalMatch {
-    outline: solid; 
-    outline-color: #BCE8F1; 
-    outline-width: 4px;
+    color: #9b59b6;
+    background-color: #e5d4ec;
+}
+
+a.hospitalMatch:hover, a.hospitalMatch:focus {
+    border-color: #9b59b6;
 }
 
 .interestMatchKey {
@@ -309,19 +307,20 @@ vertical-align: middle; color: transparent;
     color: #34495E;
 }
 
-.userProfile {
-    position: relative;
-    height:225px;
-    width:210px;
-    white-space: pre-wrap;
+.profileKey {
+    margin-top:20px;
 }
 
-.userProfile .user-image {
-    position: absolute;
-    top: 10px;
-    left:27px;
-    width: 150px;
-    margin: 0 auto;
-    background:url(../images/Logo1.png);
-    background-size: 150px 150px;
+.profileKey span {
+    margin-right: 10px;
+}
+
+.userProfile {
+    height: 250px;
+    width: 200px;
+}
+
+.userProfile img {
+    height: 200px;
+    width: 200px;
 }

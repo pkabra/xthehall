@@ -13,7 +13,7 @@ angular.module('XtheHall')
     });
   };
 })
-.controller('ProfileSettingsController', function($scope, ProfileService, AuthService) {
+.controller('ProfileSettingsController', function($scope, ProfileService, AuthService, VoiceService) {
   var fileInput = document.getElementById('image-input');
   var image = document.getElementById('image-container');
 
@@ -63,7 +63,7 @@ angular.module('XtheHall')
   $('#interestSelect').val(ProfileService.getInterest());
   $scope.hospital_select = ProfileService.getHospital_info();
   image.src = ProfileService.getImage();
-  $('#voice-control-toggle').bootstrapSwitch('state', true && ProfileService.getVoice_control()); //TODO LINK WITH PARSE HERE
+  $('#voice-control-toggle').bootstrapSwitch('state', ProfileService.getVoice_control()); //TODO LINK WITH PARSE HERE
 
 $scope.formSubmit = function() {
     $("html, body").animate({ scrollTop: $(document).height() }, "slow");
