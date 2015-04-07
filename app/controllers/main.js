@@ -16,7 +16,6 @@ angular.module('XtheHall')
 
         HistoryService.getActiveChats($scope.user.id).then(function (rooms) {
             _.each(rooms, function (r) {
-                console.log(r);
                 HistoryService.retrieveHistory(r.id, 1).then(function (m) {
                     ProfileService.getUsersWithIds(r.attributes.users).then(function(friends) {
                         var nicknames = _.map(friends, function(f) { return f.attributes.nickname; }).join(", ");
@@ -40,7 +39,11 @@ angular.module('XtheHall')
             });
         });
 
-        $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
+        $scope.trendingTopics = [];
+        $.get("/trends", function (response) {
+            $scope.trendingTopics = response['1'].slice(0, 6);
+            $scope.$apply();
+        });
 
         $scope.logout = function() {
             AuthService.logout();
@@ -51,8 +54,8 @@ angular.module('XtheHall')
                 _.each(commands, function (command) {
                     if (!_.isNaN(parseInt(command))) {
                         var chatid = parseInt(command) - 1;
-                        if (chatid < conversationPreviews.length)
-                            $location.path("/chat/" + conversationPreviews[chatid].id);
+                        if (chatid < $scope.conversationPreviews.length)
+                            $location.path("/chat/" + $scope.conversationPreviews[chatid].id);
                     }
                 });
                 $scope.$apply();
