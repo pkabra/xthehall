@@ -111,14 +111,10 @@ app.factory('VoiceService', function($rootScope, $location, $compile) {
         container: 'body',
         trigger: 'focus',
         html : true,
-        content: "<div id='voice-popover' style='display: inline-block; padding-right: 10px'>Try the voice control feature!</div><a ng-click='hidePopover()' class='glyphicon glyphicon-remove-circle' aria-hidden='true'></a><div>Say <span class='alert-danger' style='font-weight: bold; font-size: 18px'> Orange</span> to start!</div>"
+        content: "<div id='voice-popover' style='display: inline-block; padding-right: 10px'>Try the voice control feature!</div><a onclick=\"$('#voice-toggle').popover('hide');\" class='glyphicon glyphicon-remove-circle' aria-hidden='true'></a><div>Say <span class='alert-danger' style='font-weight: bold; font-size: 18px'> Orange</span> to start!</div>"
     });
   
     _dataTipPopoverTarget.popover('show');
-  
-    $rootScope.hidePopover = function() {
-      _dataTipPopoverTarget.popover('hide');
-    }
   }
 
   return {

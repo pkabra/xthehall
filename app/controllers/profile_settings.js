@@ -98,10 +98,6 @@ $scope.formSubmit = function() {
 
 };
 
-  $scope.logout = function() {
-      AuthService.logout();
-  };
-
   $('#interestSelect').select2();
   $('#voice-control-toggle').bootstrapSwitch();
 

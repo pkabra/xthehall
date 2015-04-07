@@ -45,12 +45,19 @@ angular.module('XtheHall')
             $scope.$apply();
         });
 
-        $scope.logout = function() {
-            AuthService.logout();
-        };
-
         VoiceService.setCommands({
+            create: function (commands) {
+                $location.path("/find");
+                $scope.$apply();
+            },
+
             chat: function (commands) {
+                if (_.contains(commands, "create")) {
+                    $location.path("/find");
+                    $scope.$apply();
+                    return;
+                }
+
                 _.each(commands, function (command) {
                     if (!_.isNaN(parseInt(command))) {
                         var chatid = parseInt(command) - 1;

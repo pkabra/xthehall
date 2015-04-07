@@ -52,10 +52,6 @@ angular.module('XtheHall')
     HistoryService.save($scope.room.id, $scope.user.id, text);
   };
 
-  $scope.logout = function() {
-      AuthService.logout();
-  }
-
   VoiceService.setCommands({
     compose: function (commands) {
       console.log(_.rest(commands).join(" "));
