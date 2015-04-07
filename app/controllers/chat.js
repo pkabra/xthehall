@@ -57,7 +57,7 @@ angular.module('XtheHall')
   }
 
   VoiceService.setCommands({
-    write: function (commands) {
+    compose: function (commands) {
       console.log(_.rest(commands).join(" "));
       $('input#message').val($('input#message').val() + _.rest(commands).join(" "));
       $scope.$apply();
