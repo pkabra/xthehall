@@ -33,8 +33,22 @@ angular.module('XtheHall')
         });
         $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
 
+
+
         $scope.logout = function() {
             AuthService.logout();
+        }
+
+        getTrends();
+
+        function getTrends() {
+            $http.get('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.google.com/trends/hottrends/atom/feed?pn=p1')
+                .success(function(data, status, headers, config) {
+                    console.log(data);
+                }).
+                error(function(data, status, headers, config) {
+                    console.log('error');
+                });
         }
 
         VoiceService.setCommands({
