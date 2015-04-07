@@ -16,11 +16,12 @@ angular.module('XtheHall')
 
         HistoryService.getActiveChats($scope.user.id).then(function (rooms) {
             _.each(rooms, function (r) {
+                console.log(r);
                 HistoryService.retrieveHistory(r.id, 1).then(function (m) {
                     ProfileService.getUsersWithIds(r.attributes.users).then(function(friends) {
                         var nicknames = _.map(friends, function(f) { return f.attributes.nickname; }).join(", ");
                         var image = friends[0].attributes.image ? friends[0].attributes.image._url : "../images/SmallLogo1.png";
-                        var timestamp = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+                        var timestamp = r.createdAt.toLocaleDateString() + " " + r.createdAt.toLocaleTimeString();
                         var messagePreview = "";
                         if (!_.isEmpty(m)) {
                             timestamp = m[0].time.toLocaleDateString() + " " + m[0].time.toLocaleTimeString();
@@ -39,9 +40,7 @@ angular.module('XtheHall')
             });
         });
 
-        $scope.trendingTopics = ["Red Sox", "Detroit Tiger", "Sabrina Rubin Erdely", "Yankees", "Edward Snowden"];
-
-        $scope.trendLink = "http://www.google.com/trends/hottrends#pn=p1";
+        $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
 
         $scope.logout = function() {
             AuthService.logout();
