@@ -61,6 +61,7 @@ The mic icon in the navigation bar will turn red to indicate that our
 application is ready to listen to a command.
 
 --------------
+
 On any page, one can navigate around the application by using the
 "navigate to" command. One could also logout at any time by uttering
 a "logout" command.
