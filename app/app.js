@@ -74,6 +74,7 @@ var app = angular.module('XtheHall', [
 
   $rootScope.logout = function () {
     AuthService.logout();
+    $location.path("/login");
   };
 
   // create a user variable which is accessable from root scope

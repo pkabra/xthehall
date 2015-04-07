@@ -18,6 +18,7 @@ app.factory('AuthService', function($q, $rootScope, $location, InstantMessageSer
       })
     } else {
       var currentUser = Parse.User.current();
+      $rootScope.currentUser = currentUser;
       ProfileService.init(currentUser.id).then(function(obj) {
         if (!angular.isUndefined(d)) {
           $rootScope.user = obj;

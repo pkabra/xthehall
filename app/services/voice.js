@@ -103,6 +103,7 @@ app.factory('VoiceService', function($rootScope, $location, $compile) {
 
   if ($location.path() !== "/login" &&
       !_.isUndefined(recognition) &&
+      $rootScope.user.attributes &&
       $rootScope.user.attributes.voice_control) {
     _dataTipPopoverTarget = $("#voice-toggle");
     _dataTipPopoverTarget.popover({

@@ -1,5 +1,5 @@
 angular.module('XtheHall')
-.controller('LoginController', function($q, $scope, AuthService) {
+.controller('LoginController', function($q, $scope, $location, AuthService) {
 
   $scope.showError = false;
   $scope.showSuccess = false;
@@ -7,15 +7,14 @@ angular.module('XtheHall')
   $scope.loginfb = function () {
     FB.login(function (response) {
       if (response.status == 'connected') {
-        window.location.href="#/home";
+        window.location.href = "#/home";
       }
     });
   }
 
   $scope.login = function(user) {
   	AuthService.login(user.account, user.password).then(function() {
-  		AuthService.watchStatusChange();
-  		window.location.href="#/profile_settings";
+      window.location.href = "#/home";
   	}, function() {
   		$scope.error = 'Error: wrong password or username';
   		$scope.showError = true;

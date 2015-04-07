@@ -152,8 +152,8 @@ app.factory('ProfileService', function($q, $rootScope) {
 
     setPassword: function(newPass) {
       if ($rootScope.user.type == "Parse") {
-        $rootScope.user.setPassword(newPass);
-        $rootScope.user.save();
+        $rootScope.currentUser.setPassword(newPass);
+        $rootScope.currentUser.save();
       }
     },
 
