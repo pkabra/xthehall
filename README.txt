@@ -10,7 +10,7 @@
 INTRODUCTION
 ------------
 In the three weeks that an average patient spends in the ICU,
-s/he generally suffers from physical and cognitive limitations.
+a patient generally suffers from physical and cognitive limitations.
 These ailments limit patients’ ability to interact with the world
 around them. While normally these people may be able to freely meet
 with other individuals through person-to-person contact or social
@@ -94,13 +94,33 @@ Remember that voice commands need to be enabled in the application's
 settings. Then, once on a page of XtheHall, one can initiate a voice
 command by saying the word "orange."
 
-Main:
+On any page, one can navigate around the application by using the
+"navigate to" command. One could also logout at any time by uttering
+a "logout" command.
 
-Chat:
+At the home screen, one may start a chat with a "chat" command. A user
+may specify which chat by its number from left to right and up to down.
+So, the first chat by the plus button is chat 1.
 
-Settings:
+While chatting, one could write a new message using the "compose" command
+followed by the contents of the new message. Then, the user may send it by
+uttering a "send" command.
 
-Find Friends:
+In settings, a user can change his or her nickname or interests with a
+"set nickname" or "set interests" command respectively. Once done editing,
+a "save" command will save the changes.
+
+Finally, at the find-friends page, a new user could be added to the new
+chatroom with a "add user" command. The user could be specified with a
+number (like a chatroom before) or with the username. Once all of the
+users are selected, a new chat may begin with the utterance of a "chat"
+command.
+
+Example Commands:
+    "Orange Navigate to Home"
+    "Orange Chat Two"
+    "Orange Set Nickname Wolverine"
+    "Orange Add User Jim Harbaugh"
 
 
 --------------
@@ -108,6 +128,6 @@ ACKNOLOGEMENTS
 --------------
 Our thanks to the Simon Says Kinect group for providing the XtheHall team
 with feedback to help make the final product as good as it is. Also,
-thanks to the EECS 481 instructional staff for helping throughout the
-development process.
+we are grateful to the EECS 481 instructional staff for helping
+throughout the development process.
 
