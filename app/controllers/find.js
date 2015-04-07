@@ -127,7 +127,6 @@ angular.module('XtheHall')
 
         var users = selectUsersObject.val();
         users.push($scope.user.id);
-        console.log(users);
         HistoryService.create_room(users, success);
     };
 
@@ -149,9 +148,7 @@ angular.module('XtheHall')
 
             _.each(_.rest(commands, _.indexOf(commands, "add")), function(c) {
                 _.each($scope.visibleProfiles, function (prof) {
-                    console.log(prof.attributes.nickname + " " + c);
                     if (prof.attributes.nickname.toLowerCase().indexOf(c.toLowerCase()) > -1) {
-                        console.log("found 1");
                         if (possibleUsers[prof.id]) {
                             possibleUsers[prof.id].count++;
                         } else {
@@ -160,9 +157,7 @@ angular.module('XtheHall')
                     }
                 });
             });
-            console.log(possibleUsers);
             var mostProbable = _.max(possibleUsers, function (p) { return p.count; });
-            console.log(mostProbable);
             $scope.addToChatList($scope.addToChatList(mostProbable.id));
         },
 
