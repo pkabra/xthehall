@@ -58,13 +58,14 @@ Ease of Use and Accessibility: Our application was designed with the
     potential ailments of the end user under focus. As such, there are
     many different features in place to make the product easy to use.
     The most prominent of these is the voice control which can be
-    enabled in the settings. Our key word to enable it is "Orange."
-    Also, be sure to try out the magnifying feature for the visually
-    impaired by hitting the eye icon in the navigation bar.
+    enabled in the settings. A detailed list of the voice commands can be
+    found bellow. Be sure to try all of them out! Also, remember to try
+    the magnifying feature for the visually impaired by hitting the
+    eye icon in the navigation bar.
 
-Chat Infrastructure: Of course, the primary purpose of the XtheHall platform
-    is to start conversations between patients in the same hospital.
-    Our robust find-friends page allows users to find potential
+Chat Infrastructure: Of course, the primary purpose of the XtheHall
+    platform is to start conversations between patients in the same
+    hospital. Our robust find-friends page allows users to find potential
     conversation partners who share common interests with them. At the
     same time, it is incredibly easy to simply click or tap on a few
     friends' profile pictures to initialize a chat. Automatically, those
@@ -77,16 +78,29 @@ User Management: Our application is customizable to allow users to
     can be managed in our settings, where users may modify their personal
     information, like their interest lists, and augment their feature
     sets, like by enabling voice control. At the same time, privacy of
-    our users was a top priority, which is why a nickname instead of a user's name is stored in XtheHall's database.
+    our users was a top priority, which is why a nickname instead of a
+    user's name is stored in XtheHall's database.
 
 Outside Resources: XtheHall leverages multiple other systems to the
-    benefit of our user base. The team is very proud of these, like the incorporation of Facebook login, as they greatly improve the general
+    benefit of our user base. The team is very proud of these, like the
+    incorporation of Facebook login, as they greatly improve the general
     experience of using the XtheHall platform.
 
 
 --------------
 VOICE COMMANDS
 --------------
+Remember that voice commands need to be enabled in the application's
+settings. Then, once on a page of XtheHall, one can initiate a voice
+command by saying the word "orange."
+
+Main:
+
+Chat:
+
+Settings:
+
+Find Friends:
 
 
 --------------
