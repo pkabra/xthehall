@@ -33,7 +33,6 @@ app.factory('ProfileService', function($q, $rootScope) {
                 console.log('Failed to update lcoation with error ' + error);
                 deferred.resolve(profile);
               });
-              window.location.href="#/profile_settings";
           } else {
             profile = result[0];
             deferred.resolve(profile);

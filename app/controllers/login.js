@@ -14,8 +14,15 @@ angular.module('XtheHall')
 
   $scope.login = function(user) {
   	AuthService.login(user.account, user.password).then(function() {
-      AuthService.watchStatusChange();
-      window.location.href = "#/home";
+      var deferred = $q.defer();
+      AuthService.watchStatusChange(deferred);
+      deferred.promise.then(function () {
+        if (_.isEmpty($scope.user.attributes.nickname) || $scope.user.attributes.nickname == "XtheHallUser") {
+          window.location.href = "#/profile_settings";
+        } else {
+          window.location.href = "#/home";
+        }
+      });
   	}, function() {
   		$scope.error = 'Error: wrong password or username';
   		$scope.showError = true;
