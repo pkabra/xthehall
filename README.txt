@@ -47,6 +47,7 @@ https://localhost:4443/#/login.
 --------------
 VOICE COMMANDS
 --------------
+
 ON GOOGLE CHROME, voice commands can be used. Here is a descriptiong
 about how they are used.
 
@@ -64,7 +65,7 @@ On any page, one can navigate around the application by using the
 "navigate to" command. One could also logout at any time by uttering
 a "logout" command.
 
-Example:
+Examples:
 "orange" *pause* "navigate to home"
 "orange" *pause* "navigate to find friends"
 "orange" *pause* "navigate to settings"
@@ -103,12 +104,10 @@ Example Commands:
     "Orange Add User Jim Harbaugh"
 
 
-
-
-
 ------------
 REQUIREMENTS
 ------------
+
 This is a reference to the completion of each of our scoping document's
 requirements.
 
