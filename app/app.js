@@ -83,18 +83,14 @@ var app = angular.module('XtheHall', [
   _dataTipPopoverTarget = $("#voice-toggle");
   _dataTipPopoverTarget.popover({
       title: "",
-      placement: 'bottom',
+      placement: 'left',
       container: 'body',
       trigger: 'focus',
       html : true,
       content: "<div id='voice-popover' style='display: inline-block; padding-right: 10px'>Try the voice control feature!</div><a ng-click='hidePopover()' class='glyphicon glyphicon-remove-circle' aria-hidden='true'></a><div>Say <span class='alert-danger' style='font-weight: bold; font-size: 18px'> Orange</span> to start!</div>"
   });
 
-  function delayShow() {
-    _dataTipPopoverTarget.popover('show');
-  }
-
-  $timeout(delayShow, 1000);
+  _dataTipPopoverTarget.popover('show');
 
   $rootScope.hidePopover = function() {
     _dataTipPopoverTarget.popover('hide');
