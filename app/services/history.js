@@ -31,12 +31,26 @@ var MessageHistory = Parse.Object.extend({
     },
 
     create_room: function (users, success) {
-      var room = new Parse.Object('Chatrooms');
-      room.setUsers(users);
-      room.save(null, {
-        success: function (room) {
-          success(room);
-        }
+      var query = new Parse.Query('Chatrooms');
+      query.containsAll('users', users);
+      query.find().then(function (results) {
+        var searching = true;
+        _.each(results, function (r) {
+          if (r.attributes.users.length == users.length && searching) {
+            success(r);
+            searching = false;
+          }
+        });
+        
+        if (!searching) return;
+
+        var room = new Parse.Object('Chatrooms');
+        room.setUsers(users);
+        room.save(null, {
+          success: function (room) {
+            success(room);
+          }
+        });
       });
     },
 
