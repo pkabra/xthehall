@@ -1,5 +1,5 @@
 angular.module('XtheHall')
-.controller('FindController', function($scope, $location, MatchService, ProfileService, HistoryService) {
+.controller('FindController', function($scope, $location, MatchService, ProfileService, HistoryService, VoiceService) {
 
     $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 50}});
 
@@ -130,4 +130,45 @@ angular.module('XtheHall')
         console.log(users);
         HistoryService.create_room(users, success);
     };
+
+    VoiceService.setCommands({
+        add: function (commands) {
+            if (_.contains(commands, "user")) {
+                _.each(commands, function (c) {
+                    if (!_.isNaN(parseInt(c))) {
+                        var uid = parseInt(c) - 1;
+                        if (uid < $scope.visibleProfiles.length) {
+                            $scope.addToChatList($scope.visibleProfiles[uid].id);
+                        }
+                    }
+                });
+                return;
+            }
+
+            var possibleUsers = {};
+
+            _.each(_.rest(commands, _.indexOf(commands, "add")), function(c) {
+                _.each($scope.visibleProfiles, function (prof) {
+                    if (prof.attributes.nickname.indexOf(c) > -1) {
+                        if (possibleUsers[prof.id]) {
+                            possibleUsers[prof.id].count++;
+                        } else {
+                            possibleUsers[prof.id] = { id: prof.id, count: 1 };
+                        }
+                    }
+                });
+            });
+
+            var mostProbable = _.max(possibleUsers, function (p) { return p.count; });
+            $scope.addToChatList($scope.addToChatList(mostProbable.id));
+        },
+
+        create: function (commands) {
+            $scope.createNewChatRoom();
+        }
+    });
+
+    if (ProfileService.getVoice_control()) {
+        VoiceService.start();
+    }
 });

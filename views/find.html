@@ -22,7 +22,7 @@
 
     <div class="row">
         <div ng-if="(profile.id != user.id) && (profile.attributes.nickname != 'XtheHallUser')" ng-repeat="profile in visibleProfiles" class="col-xs-2 userProfile">
-            <div ng-click="addToChatList(profile.attributes.nickname, profile.id);" ng-class="applyProfileClasses(profile)" class="box thumbnail text-center user-image" style="background:url({{profile.attributes.image._url}}) no-repeat; background-size: 150px 150px;"  data-popover="" data-html=true data-content="{{profile.attributes.hover_text}}">
+            <div ng-click="addToChatList(profile.id);" ng-class="applyProfileClasses(profile)" class="box thumbnail text-center user-image" style="background:url({{profile.attributes.image._url}}) no-repeat; background-size: 150px 150px;"  data-popover="" data-html=true data-content="{{profile.attributes.hover_text}}">
                 <div class="overlay">Connect</div>
             </div>
             <div>

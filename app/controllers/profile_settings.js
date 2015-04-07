@@ -98,11 +98,40 @@ $scope.formSubmit = function() {
 
 };
 
-$scope.logout = function() {
-    AuthService.logout();
-};
+  $scope.logout = function() {
+      AuthService.logout();
+  };
 
-$('#hospital_select').val("Beaumont Hospital");
-$('#interestSelect').select2();
-$('#voice-control-toggle').bootstrapSwitch();
+  $('#interestSelect').select2();
+  $('#voice-control-toggle').bootstrapSwitch();
+
+  VoiceService.setCommands({
+    nickname: function (commands) {
+      var temp = _.rest(commands, _.indexOf(commands, "nickname"));
+      if (_.contains(temp, "to")) {
+        temp = _.rest(temp, _.indexOf(temp, "to"))
+      }
+      $scope.nickname = temp.join(" ");
+    },
+
+    save: function (commands) {
+      $scope.formSubmit();
+    },
+
+    interests: function(commands) {
+      var interests = ["celebrities", "cooking", "fashion", "movies", "politics", "sports", "technology"];
+      var listed = [];
+      _.each(commands, function (c) {
+        if (_.contains(interests, c)) {
+          c[0].toUpperCase();
+          listed.push(c);
+        }
+      });
+      $('#interestSelect').select2("val", listed);
+    }
+  });
+
+  if (ProfileService.getVoice_control()) {
+    VoiceService.start();
+  }
 });
