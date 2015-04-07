@@ -38,9 +38,10 @@ angular.module('XtheHall')
                 });
             });
         });
-        $scope.trendingTopics = ["Adam", "Coolest Coder Evvva", "What Person Is Fantastic?  Adam!", "Bird Planes?!?"];
 
+        $scope.trendingTopics = ["Red Sox", "Detroit Tiger", "Sabrina Rubin Erdely", "Yankees", "Edward Snowden"];
 
+        $scope.trendLink = "http://www.google.com/trends/hottrends#pn=p1";
 
         $scope.logout = function() {
             AuthService.logout();
