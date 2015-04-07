@@ -43,6 +43,9 @@ clone the repository and run the server.sh scrip in the root directory
 (./server.sh). The website should now be accesible through
 https://localhost:4443/#/login.
 
+The one requirement we anticipate you needing to install is the requests module: 
+sudo pip install requests
+
 
 --------------
 VOICE COMMANDS
