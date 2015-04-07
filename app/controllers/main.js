@@ -39,18 +39,6 @@ angular.module('XtheHall')
             AuthService.logout();
         }
 
-        getTrends();
-
-        function getTrends() {
-            $http.get('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.google.com/trends/hottrends/atom/feed?pn=p1')
-                .success(function(data, status, headers, config) {
-                    console.log(data);
-                }).
-                error(function(data, status, headers, config) {
-                    console.log('error');
-                });
-        }
-
         VoiceService.setCommands({
             chat: function (commands) {
                 _.each(commands, function (command) {
