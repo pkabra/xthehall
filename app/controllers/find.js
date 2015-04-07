@@ -115,7 +115,6 @@ angular.module('XtheHall')
     $scope.applyProfileClasses = function(profile) {
         return {
             interestMatch: $scope.isSimilarInterests(profile.attributes.simscore),
-            notInterestMatch: !$scope.isSimilarInterests(profile.attributes.simscore),
             hospitalMatch: $scope.isSameHospital(profile.attributes.hospital_info)
         };
     };

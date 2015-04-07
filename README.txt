@@ -105,3 +105,67 @@ with feedback to help make the final product as good as it is. Also,
 we are grateful to the EECS 481 instructional staff for helping
 throughout the development process.
 
+
+------------
+REQUIREMENTS
+------------
+This is a reference to the completion of each of our scoping document's
+requirements.
+
+USE-000: The large buttons and simple design should make the application
+usable for a wide variety of users in the ICU.
+
+USE-001: The Bootstrap front-end infrastructure is compatible with touch-
+screen devices.
+
+USE-002: Voice-control has been implemented for use by desktop users.
+
+CHAT-000: We hope that the layout of the application and completion of
+its chat system satisfies this requirement.
+
+CHAT-001, CHAT-002: Both versions of chatting are available from the
+find-friends screen.
+
+CHAT-003: Chat history can be viewed from the home screen as thumbnail
+previews. Specific conversation histories may be viewed by clicking or
+tapping into a chat (like in other chatting applications).
+
+CHAT-004: The XtheHall team decided that guest chat would not foster
+long-term connections, which was the overall goal of the project.  We
+therefore did not include this feature in this version of release.
+
+CHAT-005: Trending topics are shown on the main page. They are, however,
+drawn from Google instead of Twitter.
+
+CHAT-006: This task was designated as optional and the team did not have
+time to complete it. However, if desired in the future, the application
+is designed to be augmented with new features like this.
+
+PRO-000: Other patients may be discovered in the find-friends page.
+
+PRO-001: Patient's information is stored in XtheHall's Parse database.
+The XtheHall platform allows for both Facebook and traditional-email
+accounts.
+
+PRO-002: We thought to keep the experience for the user as easy as
+possible, the general list of chats would function as the user's buddy
+list.  This would alleviate the need for the user to maintain two lists
+and allow them to focus on building bonds with other patients.
+
+PRO-003: Patient's information can be modified through the settings
+page.
+
+PRO-004: The bottom of the settings page allows users to delete their
+accounts.
+
+PRO-005: This task was optional and the team did not have time to
+complete it.
+
+PRO-006: This feature is accessible in the find-friends page.
+
+PRO-007: The backend infrastructure takes into account user interests and
+location to show potential chat partners who are more likely to connect
+well with the user.
+
+PRO-008: Facebook login is available in the login screen.
+

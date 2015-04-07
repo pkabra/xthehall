@@ -47,7 +47,7 @@ angular.module('XtheHall')
 
         $scope.logout = function() {
             AuthService.logout();
-        }
+        };
 
         VoiceService.setCommands({
             chat: function (commands) {
