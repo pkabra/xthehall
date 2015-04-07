@@ -4,7 +4,8 @@
    > < | __| '_ \ / _ \  __  |/ _` | | |
   / . \| |_| | | |  __/ |  | | (_| | | |
  /_/ \_\\__|_| |_|\___|_|  |_|\__,_|_|_|
-                                           
+  
+
 -------
 CONTACT
 -------
@@ -19,7 +20,6 @@ sent to any members of the XtheHall team:
 ----------
 DEPLOYMENT
 ----------
-
 Our application has been deployed temporarily and can be accessed with
 the following URL:
 
@@ -50,18 +50,15 @@ sudo pip install requests
 --------------
 VOICE COMMANDS
 --------------
-
 ON GOOGLE CHROME, voice commands can be used. Here is a descriptiong
-about how they are used.
-
-*We intend to include built in voice instructions into our web application
-for our final release*
+about how they are used.  We intend to include built in voice instructions into
+our web application for our final release
 
 VOICE COMMANDS NEED TO BE ENABLED IN YOUR PROFILE SETTINGS
 
-***All commands must be initiated by saying "orange"*** The mic icon on the top
-right will turn red to indicate that our application is ready to listen to
-a command.
+***All commands must be initiated by saying "orange"***
+The mic icon in the navigation bar will turn red to indicate that our
+application is ready to listen to a command.
 
 --------------
 On any page, one can navigate around the application by using the
@@ -71,7 +68,6 @@ a "logout" command.
 Examples:
 "orange" *pause* "navigate to home"
 "orange" *pause* "navigate to find friends"
-"orange" *pause* "navigate to settings"
 
 --------------
 
@@ -79,11 +75,17 @@ At the home screen, one may start a chat with a "chat" command. A user
 may specify which chat by its number from left to right and up to down.
 So, the first chat by the plus button is chat 1.
 
+Example:
+"orange" *pause* "chat 1"
+
+--------------
+
 While chatting, one could write a new message using the "compose" command
 followed by the contents of the new message. Then, the user may send it by
 uttering a "send" command.
 
-"orange" *pause* "compose <message>"
+Examples:
+"orange" *pause* "compose let's go blue"
 "orange" *pause* "send"
 
 --------------
@@ -100,17 +102,13 @@ number (like a chatroom before) or with the username. Once all of the
 users are selected, a new chat may begin with the utterance of a "chat"
 command.
 
-Example Commands:
-    "Orange Navigate to Home"
-    "Orange Chat Two"
-    "Orange Set Nickname Wolverine"
-    "Orange Add User Jim Harbaugh"
+Example:
+"orange" *pause* "add user jim harbaugh"
 
 
 ------------
 REQUIREMENTS
 ------------
-
 This is a reference to the completion of each of our scoping document's
 requirements.
 
