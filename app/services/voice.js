@@ -1,4 +1,4 @@
-app.factory('VoiceService', function($rootScope, $location) {
+app.factory('VoiceService', function($rootScope, $location, $compile) {
 
   var microphoneIcon = $('#voice-toggle');
 
@@ -30,7 +30,20 @@ app.factory('VoiceService', function($rootScope, $location) {
   };
 
   var runCommand = function (command) {
-    console.log(command.join(" "));
+
+    _dataTipPopoverTarget = $("#voice-toggle");
+    _dataTipPopoverTarget.popover('show');
+
+    var node = "<div>Listening...</div>" +
+        "<div>" + command.join(" ") + "</div>";
+
+    $rootScope.$apply(function() {
+      $('.popover-content').empty();
+      $('.popover-content').append(($compile(node))($rootScope));
+    });
+
+    setTimeout(function() {_dataTipPopoverTarget.popover('hide');}, 5000);
+
     if (isEasterEgg(command)) {
       alert("I'm sorry " + $rootScope.user.attributes.nickname + ", I'm afraid I can't do that.");
       return;

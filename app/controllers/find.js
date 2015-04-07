@@ -92,7 +92,7 @@ angular.module('XtheHall')
         $('#infoDialog').modal('show');
     };
 
-    $scope.addToChatList = function(name, fbid) {
+    $scope.addToChatList = function(fbid) {
         var data = selectUsersObject.val();
         if (data) {
             data.push(fbid);
@@ -149,7 +149,9 @@ angular.module('XtheHall')
 
             _.each(_.rest(commands, _.indexOf(commands, "add")), function(c) {
                 _.each($scope.visibleProfiles, function (prof) {
-                    if (prof.attributes.nickname.indexOf(c) > -1) {
+                    console.log(prof.attributes.nickname + " " + c);
+                    if (prof.attributes.nickname.toLowerCase().indexOf(c.toLowerCase()) > -1) {
+                        console.log("found 1");
                         if (possibleUsers[prof.id]) {
                             possibleUsers[prof.id].count++;
                         } else {
@@ -158,8 +160,9 @@ angular.module('XtheHall')
                     }
                 });
             });
-
+            console.log(possibleUsers);
             var mostProbable = _.max(possibleUsers, function (p) { return p.count; });
+            console.log(mostProbable);
             $scope.addToChatList($scope.addToChatList(mostProbable.id));
         },
 

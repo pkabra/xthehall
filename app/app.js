@@ -83,7 +83,7 @@ var app = angular.module('XtheHall', [
   _dataTipPopoverTarget = $("#voice-toggle");
   _dataTipPopoverTarget.popover({
       title: "",
-      placement: 'left',
+      placement: 'bottom',
       container: 'body',
       trigger: 'focus',
       html : true,
