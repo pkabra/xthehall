@@ -1,18 +1,6 @@
 angular.module('XtheHall')
     .controller('MainController', function($scope, $location, $http, HistoryService, MatchService, ProfileService, VoiceService, AuthService) {
         $scope.conversationPreviews = [];
-        $scope.accessibility = false;
-
-        $('#accessibility-toggle').on('click', function() {
-            $scope.accessibility = !$scope.accessibility;
-            if($scope.accessibility) {
-                $('body').addClass('accessibility');
-                $('h4').addClass('accessibility');
-            } else {
-                $('body').removeClass('accessibility');
-            }
-            $scope.$apply();
-        });
 
         HistoryService.getActiveChats($scope.user.id).then(function (rooms) {
             _.each(rooms, function (r) {

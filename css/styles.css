@@ -7,6 +7,10 @@ body {
     font-size: 250%;
 }
 
+p.accessibility {
+    font-size: 200%;
+}
+
 .nav-icon {
     font-size: 24px;
 }
