@@ -31,18 +31,22 @@ app.factory('VoiceService', function($rootScope, $location, $compile) {
 
   var runCommand = function (command) {
 
-    _dataTipPopoverTarget = $("#voice-toggle");
-    _dataTipPopoverTarget.popover('show');
+    if ($rootScope.user.attributes &&
+      $rootScope.user.attributes.voice_control) {
 
-    var node = "<div>Listening...</div>" +
-        "<div>" + command.join(" ") + "</div>";
+      _dataTipPopoverTarget = $("#voice-toggle");
+      _dataTipPopoverTarget.popover('show');
 
-    $rootScope.$apply(function() {
-      $('.popover-content').empty();
-      $('.popover-content').append(($compile(node))($rootScope));
-    });
+      var node = "<div>Listening...</div>" +
+          "<div>" + command.join(" ") + "</div>";
 
-    setTimeout(function() {_dataTipPopoverTarget.popover('hide');}, 5000);
+      $rootScope.$apply(function() {
+        $('.popover-content').empty();
+        $('.popover-content').append(($compile(node))($rootScope));
+      });
+
+      setTimeout(function() {_dataTipPopoverTarget.popover('hide');}, 5000);
+    }
 
     if (isEasterEgg(command)) {
       alert("I'm sorry " + $rootScope.user.attributes.nickname + ", I'm afraid I can't do that.");
@@ -114,7 +118,7 @@ app.factory('VoiceService', function($rootScope, $location, $compile) {
         html : true,
         content: "<div id='voice-popover' style='display: inline-block; padding-right: 10px'>Try the voice control feature!</div><a onclick=\"$('#voice-toggle').popover('hide');\" class='glyphicon glyphicon-remove-circle' aria-hidden='true'></a><div>Say <span class='alert-danger' style='font-weight: bold; font-size: 18px'> Orange</span> to start!</div>"
     });
-  
+
     _dataTipPopoverTarget.popover('show');
   }
 
