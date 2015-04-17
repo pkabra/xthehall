@@ -4,11 +4,11 @@ body {
 }
 
 .accessibility {
-    font-size: 250%;
+    font-size: 200%;
 }
 
 p.accessibility {
-    font-size: 200%;
+    font-size: 150%;
 }
 
 .nav-icon {
@@ -327,4 +327,13 @@ a.hospitalMatch:hover, a.hospitalMatch:focus {
 .userProfile img {
     height: 200px;
     width: 200px;
+}
+
+.friend-caption {
+    position: absolute;
+    bottom: 0;
+}
+
+.friend-caption p {
+    margin-bottom: 0;
 }
