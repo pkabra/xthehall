@@ -70,6 +70,12 @@ $scope.formSubmit = function() {
     $scope.formError = false;
     $scope.formSave = false;
 
+    if ($scope.nickname === "XtheHallUser") {
+      $scope.formError = true;
+      $scope.formErrorMessage = "Please update the nickname";
+      return;
+    }
+
     var voiceControl = $('#voice-control-toggle').bootstrapSwitch("state");
     var interests = $('#interestSelect').val();
 
@@ -87,7 +93,7 @@ $scope.formSubmit = function() {
     if (!_.isEmpty($scope.newPassword))
       ProfileService.setPassword($scope.newPassword);
     ProfileService.setVoiceControl(voiceControl);
-    
+
     var promise = ProfileService.saveProfile();
     promise.then(function() {
         $scope.formSave = true;
