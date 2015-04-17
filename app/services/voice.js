@@ -67,8 +67,8 @@ app.factory('VoiceService', function($rootScope, $location, $compile) {
       }
     })
   };
-
-  if (webkitSpeechRecognition) {
+  
+  if (typeof webkitSpeechRecognition !== "undefined") {
     recognition = new webkitSpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
