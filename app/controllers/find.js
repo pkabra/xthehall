@@ -65,6 +65,8 @@ angular.module('XtheHall')
             if ($scope.sameHospitalProfiles.length == 0) {
                 for (i = 0; i < $scope.profiles.length; i++) {
                     if ($scope.profiles[i].attributes.hospital_info == $scope.user_hospital) {
+                        if (typeof $scope.user_hospital === 'undefined')
+                            continue;
                         $scope.sameHospitalProfiles.push($scope.profiles[i]);
                     }
                 }
@@ -103,6 +105,8 @@ angular.module('XtheHall')
     };
 
     $scope.isSameHospital = function(hospital) {
+        if (typeof $scope.user_hospital === 'undefined')
+            return false;
         return (hospital == $scope.user_hospital);
     };
 
