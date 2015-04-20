@@ -114,8 +114,12 @@ div.message-preview {
 }
 
 div.message-preview span {
-    text-overflow: ellipsis;
     color: white;
+    display:block;
+    max-height: 90px;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.chat-id-timestamp {
