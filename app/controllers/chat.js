@@ -8,8 +8,6 @@ angular.module('XtheHall')
   .then(function(history) {
     _.each(history, function(h) {
       var u = $scope.room.users[h.sender];
-      console.log($scope.room.users);
-      console.log(h.sender);
       var m = {
         incoming: h.sender != $scope.user.id,
         user: u.attributes.nickname || u.attributes.fbid,
@@ -22,6 +20,8 @@ angular.module('XtheHall')
 
   var incomingmessageListener = function(message) {
     if (message.textBody.room != $scope.room.id) return;
+    if (message.senderId == $scope.user.id) return;
+    
     var t = new Date();
     console.log(message);
     var m = {
@@ -50,6 +50,15 @@ angular.module('XtheHall')
 
     InstantMessageService.sendMessage(recipients, {room: $scope.room.id, text: text});
     HistoryService.save($scope.room.id, $scope.user.id, text);
+    
+    var t = new Date();
+    var m = {
+      incoming: false,
+      user: $scope.user.attributes.nickname || $scope.user.id,
+      time: t.toLocaleDateString() + " " + t.toLocaleTimeString(),
+      text: text
+    };
+    $scope.messages.push(m);
   };
 
   VoiceService.setCommands({
