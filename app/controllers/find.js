@@ -12,7 +12,7 @@ angular.module('XtheHall')
 
     var selectUsersObject = $('#chatUsers');
 
-    MatchService.findUsersRandom(10).then(function(profiles) {
+    MatchService.findUsersRandom(100).then(function(profiles) {
 
         $scope.user_hospital = ProfileService.getHospital_info();
         $scope.user_interests = ProfileService.getInterest();
