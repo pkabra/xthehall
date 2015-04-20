@@ -30,6 +30,7 @@ angular.module('XtheHall')
       }, function() {
           $('#deleteUserModal').modal('hide');
           $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+          $scope.formSave = false;
           $scope.formError = true;
           $scope.formErrorMessage = "Unsuccessful deletion of account. Please try again later.";
       });
@@ -71,6 +72,7 @@ $scope.formSubmit = function() {
     $scope.formSave = false;
 
     if ($scope.nickname === "XtheHallUser") {
+      $scope.formSave = false;
       $scope.formError = true;
       $scope.formErrorMessage = "Please update the nickname";
       return;
@@ -80,6 +82,7 @@ $scope.formSubmit = function() {
     var interests = $('#interestSelect').val();
 
     if($scope.newPassword !== $scope.newPasswordConfirmation) {
+        $scope.formSave = false;
         $scope.formError = true;
         $scope.formErrorMessage = "New password does not match its confirmation.";
         return;
@@ -101,7 +104,9 @@ $scope.formSubmit = function() {
     var promise = ProfileService.saveProfile();
     promise.then(function() {
         $scope.formSave = true;
+        $scope.formError = false;
     }, function() {
+        $scope.formSave = false;
         $scope.formError = true;
         $scope.formErrorMessage = "Unsuccessful save. Please try again.";
     });
