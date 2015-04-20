@@ -26,7 +26,7 @@ angular.module('XtheHall')
       var promise = ProfileService.deleteProfile();
       promise.then(function() {
           AuthService.logout();
-          window.location.href="#/login";
+          window.location.href="#/login?del";
       }, function() {
           $('#deleteUserModal').modal('hide');
           $("html, body").animate({ scrollTop: $(document).height() }, "slow");
