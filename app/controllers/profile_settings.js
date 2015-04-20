@@ -92,8 +92,12 @@ $scope.formSubmit = function() {
 
     if (!_.isEmpty($scope.newPassword))
       ProfileService.setPassword($scope.newPassword);
-    ProfileService.setVoiceControl(voiceControl);
 
+    ProfileService.setVoiceControl(voiceControl);
+    if (!voiceControl) {
+      VoiceService.stop();
+    }
+    
     var promise = ProfileService.saveProfile();
     promise.then(function() {
         $scope.formSave = true;
