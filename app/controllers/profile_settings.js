@@ -17,6 +17,9 @@ angular.module('XtheHall')
   var fileInput = document.getElementById('image-input');
   var image = document.getElementById('image-container');
 
+  $('#interestSelect').select2();
+  $('#voice-control-toggle').bootstrapSwitch();
+
   $scope.showDeleteUser = function() {
       $('#deleteUserModal').modal('show');
   };
@@ -112,9 +115,6 @@ $scope.formSubmit = function() {
     });
 
 };
-
-  $('#interestSelect').select2();
-  $('#voice-control-toggle').bootstrapSwitch();
 
   VoiceService.setCommands({
     nickname: function (commands) {
