@@ -10,9 +10,7 @@
                     <input type="password" class="form-control" ng-model="user.password" placeholder="Password" required>
                     <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In" ng-click="login(user)"/>
                     <input type="submit" class="btn btn-lg btn-warning btn-block" value="Sign Up" ng-click="signup(user)"/>
-                </form>
-                <form class="form-signin">
-                    <input class="btn btn-lg btn-facebook btn-block" value="Facebook Login" ng-click="loginfb()"/>
+                    <button type="button" class="btn btn-lg btn-facebook btn-block" ng-click="loginfb()"><i class="fa fa-facebook-official" style="position:relative; right:10px; top:2px; font-size:24px; line-height:17px;"></i>Login with Facebook</button>
                 </form>
             </div>
         </div>
