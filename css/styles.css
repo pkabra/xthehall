@@ -4,11 +4,11 @@ body {
 }
 
 .accessibility {
-    font-size: 250%;
+    font-size: 200%;
 }
 
 p.accessibility {
-    font-size: 200%;
+    font-size: 150%;
 }
 
 .nav-icon {
@@ -114,8 +114,12 @@ div.message-preview {
 }
 
 div.message-preview span {
-    text-overflow: ellipsis;
     color: white;
+    display:block;
+    max-height: 90px;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.chat-id-timestamp {
@@ -286,6 +290,8 @@ vertical-align: middle; color: transparent;
 .interestMatch {
     color: #e67e22;
     background-color: #f8dbc1;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 a.interestMatch:hover, a.interestMatch:focus {
@@ -295,6 +301,8 @@ a.interestMatch:hover, a.interestMatch:focus {
 .hospitalMatch {
     color: #9b59b6;
     background-color: #e5d4ec;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 a.hospitalMatch:hover, a.hospitalMatch:focus {
@@ -327,4 +335,13 @@ a.hospitalMatch:hover, a.hospitalMatch:focus {
 .userProfile img {
     height: 200px;
     width: 200px;
+}
+
+.friend-caption {
+    position: absolute;
+    bottom: 0;
+}
+
+.friend-caption p {
+    margin-bottom: 0;
 }

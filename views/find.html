@@ -16,13 +16,15 @@
     </p>
 
     <div class="row">
-        <div ng-if="(profile.id != user.id) && (profile.attributes.nickname != 'XtheHallUser')" ng-repeat="profile in visibleProfiles" class="col-xs-2 col-md-3">
-            <a  ng-click="addToChatList(profile.id);" href="" class="thumbnail userProfile" ng-class="applyProfileClasses(profile)" data-popover="" data-html=true data-content="{{profile.attributes.hover_text}}">
+        <div class="col">
+        <div ng-if="(profile.id != user.id) && (profile.attributes.nickname != 'XtheHallUser')" ng-repeat="profile in visibleProfiles">
+            <a  ng-click="addToChatList(profile.id);" href="" class="thumbnail  col-xs-2 col-md-3 userProfile" ng-class="applyProfileClasses(profile)" data-popover="" data-html=true data-content="{{profile.attributes.hover_text}}">
                 <img src="{{profile.attributes.image._url}}">
-                <div class="caption">
+                <div class="friend-caption">
                     <p>{{profile.attributes.nickname}}</p>
                 </div>
             </a>
+        </div>
         </div>
     </div>
 </div>

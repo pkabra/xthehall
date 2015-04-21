@@ -181,13 +181,17 @@ app.factory('ProfileService', function($q, $rootScope) {
                       deferred.resolve();
                       return;
                   }
-                  $rootScope.user.destroy({
-                      success: function() {
-                          deferred.resolve();
-                      },
-                      error: function() {
-                          deferred.reject();
-                      }
+                  Parse.User.current().destroy({
+                    success: function () {
+                      console.log("deleted parse user...");
+                      deferred.resolve();
+                      return;
+                    },
+                    error: function () {
+                      console.log("failed to delete parse user...");
+                      deferred.reject();
+                      return;
+                    }
                   });
               },
               error: function () {

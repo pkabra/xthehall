@@ -137,6 +137,10 @@ app.factory('VoiceService', function($rootScope, $location, $compile) {
       if (recognition) {
         recognition.stop();
       }
+      if (commandListener) {
+        commandListener.stop();
+      }
+      microphoneIcon.animate({color: "#34495e", "font-size": "20px"});
     },
 
     setCommands: function (objs) {
