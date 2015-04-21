@@ -4,7 +4,15 @@
    > < | __| '_ \ / _ \  __  |/ _` | | |
   / . \| |_| | | |  __/ |  | | (_| | | |
  /_/ \_\\__|_| |_|\___|_|  |_|\__,_|_|_|
-  
+
+ _______ _________ _        _______  _                   _______  _______  _______ _________ _______  _       
+(  ____ \\__   __/( (    /|(  ___  )( \        |\     /|(  ____ \(  ____ )(  ____ \\__   __/(  ___  )( (    /|
+| (    \/   ) (   |  \  ( || (   ) || (        | )   ( || (    \/| (    )|| (    \/   ) (   | (   ) ||  \  ( |
+| (__       | |   |   \ | || (___) || |        | |   | || (__    | (____)|| (_____    | |   | |   | ||   \ | |
+|  __)      | |   | (\ \) ||  ___  || |        ( (   ) )|  __)   |     __)(_____  )   | |   | |   | || (\ \) |
+| (         | |   | | \   || (   ) || |         \ \_/ / | (      | (\ (         ) |   | |   | |   | || | \   |
+| )      ___) (___| )  \  || )   ( || (____/\    \   /  | (____/\| ) \ \__/\____) |___) (___| (___) || )  \  |
+|/       \_______/|/    )_)|/     \|(_______/     \_/   (_______/|/   \__/\_______)\_______/(_______)|/    )_)
 
 -------
 CONTACT
@@ -16,6 +24,12 @@ sent to any members of the XtheHall team:
 - Michael Wang (mwwang@umich.edu)
 - Adam Gorman (adgorman@umich.edu)
 
+***
+The modifications we made to our code consisted of fixes to the bugs that
+were caught by the bug team and also some usability issues we independently
+identified. The code is other unchanged.
+***
+
 
 ----------
 DEPLOYMENT
@@ -26,6 +40,7 @@ the following URL:
 https://xthehall.bananabread.io
 
 *Note that you need to bypass the security warning*
+
 
 *WE RECOMMEND USING GOOGLE CHROME to access this application. Only Google
 Chrome provides full support for the Web Speech API which we use to implement
@@ -46,6 +61,9 @@ https://localhost:4443/#/login.
 The one requirement we anticipate you needing to install is the requests module: 
 sudo pip install requests
 
+**Also not that Facebook login does not work when the application is deployed
+locally because the only url authorized for Facebook login is the live version
+(and not localhost)**
 
 --------------
 VOICE COMMANDS
@@ -116,8 +134,8 @@ requirements.
 USE-000: The large buttons and simple design should make the application
 usable for a wide variety of users in the ICU.
 
-USE-001: The Bootstrap front-end infrastructure is compatible with touch-
-screen devices.
+USE-001: Built with a windows tablet in mind. Sorry, it doesn't work so
+well on other devices.
 
 USE-002: Voice-control has been implemented for use by desktop users on
 Google Chrome.
