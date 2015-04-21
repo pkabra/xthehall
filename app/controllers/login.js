@@ -7,7 +7,11 @@ angular.module('XtheHall')
   $scope.loginfb = function () {
     FB.login(function (response) {
       if (response.status == 'connected') {
-        window.location.href = "#/home";
+        if (_.isEmpty($scope.user.attributes.nickname) || $scope.user.attributes.nickname == "XtheHallUser") {
+          window.location.href = "#/profile_settings";
+        } else {
+          window.location.href = "#/home";
+        }
       }
     });
   }
